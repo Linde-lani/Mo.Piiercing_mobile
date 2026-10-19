@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/black">
+        android:background="@color/moes_forest_green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#22000000"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
@@ -52,19 +52,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Account Settings"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" />
 
-            <TextView
-                android:id="@+id/tvUserEmailSettings"
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Logged in as: ..."
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginBottom="24dp" />
+                android:layout_height="120dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- 1. Circular Profile Image -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivProfilePic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_profile_placeholder"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    app:strokeColor="@color/accent_gold"
+                    app:strokeWidth="2dp" />
+
+                <!-- 2. Profile Details (Aligned Vertically) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvProfileName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textColor="@color/primary_black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvProfileEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="email@example.com"
+                        android:textColor="@color/text_dark"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
 
             <!-- Admin Panel Button -->
             <Button
@@ -73,7 +114,19 @@
                 android:layout_height="56dp"
                 android:text="Admin Panel"
                 android:textSize="16sp"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/moes_forest_green"
+                android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
+                app:cornerRadius="12dp" />
+
+            <!-- Admin Panel Button -->
+            <Button
+                android:id="@+id/btnContactUs"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Contact Us"
+                android:textSize="16sp"
+                android:backgroundTint="@color/moes_forest_green"
                 android:textColor="@color/white"
                 android:layout_marginBottom="16dp"
                 app:cornerRadius="12dp" />

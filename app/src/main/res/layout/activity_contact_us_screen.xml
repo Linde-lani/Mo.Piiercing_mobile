@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/black">
+        android:background="@color/moes_forest_green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#22000000"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Get in Touch"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -60,11 +60,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone: +1 (555) 123-4567\nEmail: support@moes.com\nAddress: 123 Main Street, Cityville"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="6dp"
-                android:layout_marginBottom="24dp" />
+                android:text="Phone: +1 (555) 123-4567\nEmail: support@moes.com\nAddress: 123 Main Street, Cityville"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
