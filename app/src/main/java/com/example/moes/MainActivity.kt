@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_about -> {
+                R.id.nav_profile -> {
                     startActivity(Intent(this, AboutUsScreen::class.java))
                     finish()
                     true

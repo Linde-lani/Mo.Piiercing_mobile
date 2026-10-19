@@ -190,7 +190,7 @@ class BookingScreen : AppCompatActivity() {
                 R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
                 R.id.nav_booking -> return@setOnItemSelectedListener true
                 R.id.nav_gallery -> startActivity(Intent(this, GalleryScreen::class.java))
-                R.id.nav_about -> startActivity(Intent(this, AboutUsScreen::class.java))
+                R.id.nav_profile -> startActivity(Intent(this, AboutUsScreen::class.java))
                 R.id.nav_settings -> startActivity(Intent(this, SettingsScreen::class.java))
             }
             finish()

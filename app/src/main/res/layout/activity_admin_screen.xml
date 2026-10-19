@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/black">
+        android:background="@color/moes_forest_green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                         android:text="Add to Gallery"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/moes_forest_green"
                         android:layout_marginBottom="16dp" />
 
                     <!-- Image Picker Area -->
@@ -151,7 +151,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="Post Product"
-                        android:backgroundTint="@color/black"
+                        android:backgroundTint="@color/moes_forest_green"
                         android:textColor="@color/white"
                         app:cornerRadius="12dp" />
 
@@ -179,7 +179,7 @@
                         android:text="Confirm Bookings"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/moes_forest_green"
                         android:layout_marginBottom="16dp" />
 
                     <androidx.recyclerview.widget.RecyclerView

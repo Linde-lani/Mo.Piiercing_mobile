@@ -11,8 +11,8 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@android:drawable/checkbox_on_background"
-        app:tint="@color/black"
+        android:src="@drawable/bg_status_confirmed"
+        app:tint="@color/moes_forest_green"
         android:layout_marginBottom="24dp" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="booking recieved"
-        android:textColor="@color/black"
+        android:textColor="@color/moes_forest_green"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thank you, User!"
-        android:textColor="@color/black"
+        android:textColor="@color/moes_forest_green"
         android:textSize="18sp"
         android:layout_marginBottom="32dp"
         android:gravity="center" />
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your appointment has been successfully booked."
-        android:textColor="@color/black"
+        android:textColor="@color/moes_forest_green"
         android:textSize="16sp"
         android:layout_marginBottom="48dp"
         android:gravity="center" />
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="Back to Gallery"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/moes_forest_green"
         android:textColor="@color/white"
         app:cornerRadius="12dp" />
 

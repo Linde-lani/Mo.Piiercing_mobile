@@ -139,7 +139,7 @@ class GalleryScreen : AppCompatActivity() {
                 R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
                 R.id.nav_booking -> startActivity(Intent(this, BookingScreen::class.java))
                 R.id.nav_gallery -> true
-                R.id.nav_about -> startActivity(Intent(this, AboutUsScreen::class.java))
+                R.id.nav_profile -> startActivity(Intent(this, AboutUsScreen::class.java))
                 R.id.nav_settings -> startActivity(Intent(this, SettingsScreen::class.java))
             }
             finish()

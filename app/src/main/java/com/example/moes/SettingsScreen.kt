@@ -1,5 +1,6 @@
 package com.example.moes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -18,6 +19,7 @@ class SettingsScreen : AppCompatActivity() {
     private lateinit var btnLogout: Button
     private lateinit var btnAdminPanel: Button
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -79,7 +81,7 @@ class SettingsScreen : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_about -> {
+                R.id.nav_profile -> {
                     startActivity(Intent(this, AboutUsScreen::class.java))
                     finish()
                     true

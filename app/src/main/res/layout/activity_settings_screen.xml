@@ -121,7 +121,7 @@
 
             <!-- Admin Panel Button -->
             <Button
-                android:id="@+id/btnContactUs"
+                android:id="@+id/tvUserEmailSettings"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Contact Us"
