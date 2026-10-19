@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".GalleryScreen">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gallery"
+            android:textColor="@color/moes_forest_green"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#22000000"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <!-- Cart Card (Bottom) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cartCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomNavigation"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#DDDDDD"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#F9F9F9">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Selections"
+                android:textColor="@color/moes_forest_green"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvCartSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 items • R0.00"
+                android:textColor="#333333"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnViewCart"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Go to Cart"
+                android:backgroundTint="@color/moes_forest_green"
+                android:textColor="@color/white"
+                android:layout_marginTop="12dp"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navBar"
+        android:layout_above="@id/cartCard"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Horizontal Layout 1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Featured Tattoos"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- 5 cards for layout 1 -->
+                    <!-- Card H1-1 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                            <ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" />
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flash Art A1" android:textStyle="bold" android:textColor="@color/moes_forest_green" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Limited minimalist ink." android:textSize="11sp" android:maxLines="1" android:ellipsize="end" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R650.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" android:layout_marginTop="4dp" />
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp">
+                                    <Button android:id="@+id/btnBookH1_1" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" />
+                                    <Space android:layout_width="match_parent" android:layout_height="8dp" />
+                                    <Button android:id="@+id/btnCartH1_1" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <!-- H1 Cards 2-5 (Simplified) -->
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Flash Art A2"
+                            android:textColor="@color/moes_forest_green"
+                            android:textStyle="bold" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Limited minimalist ink." android:textSize="11sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R750.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH1_2" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH1_2" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flash Art A3" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Limited minimalist ink." android:textSize="11sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R850.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH1_3" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH1_3" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flash Art A4" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Limited minimalist ink." android:textSize="11sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R950.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH1_4" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH1_4" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flash Art A5" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Limited minimalist ink." android:textSize="11sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R1050.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH1_5" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH1_5" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Horizontal Layout 2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standard Services"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card H2-1 -->
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piercing B1" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sterile safe jewelry." android:textSize="11sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R300.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH2_1" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH2_1" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <!-- Repeat 4 more times -->
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piercing B2" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R350.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH2_2" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH2_2" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piercing B3" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R400.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH2_3" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH2_3" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piercing B4" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R450.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH2_4" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH2_4" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:layout_width="200dp" android:layout_height="wrap_content" android:layout_marginEnd="12dp" app:cardCornerRadius="12dp" app:cardElevation="4dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"><ImageView android:layout_width="match_parent" android:layout_height="120dp" android:scaleType="centerCrop" android:src="@mipmap/ic_launcher" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Piercing B5" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="R500.00" android:textStyle="bold" android:textColor="@color/moes_forest_green" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp"><Button android:id="@+id/btnBookH2_5" android:layout_width="match_parent" android:layout_height="48dp" android:text="Booking" android:backgroundTint="@color/moes_forest_green" android:textSize="10sp" /><Space android:layout_width="match_parent" android:layout_height="8dp" /><Button android:id="@+id/btnCartH2_5" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="48dp" android:text="Add to Cart" android:textColor="@color/moes_forest_green" app:strokeColor="@color/moes_forest_green" android:textSize="10sp" /></LinearLayout></LinearLayout></LinearLayout></com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our Professional Services"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Service Card 1: Tattoo -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#DDDDDD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivServiceImage1"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher"
+                        android:contentDescription="Small Tattoo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/tvServiceName1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Small Custom Tattoo"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/moes_forest_green" />
+
+                        <TextView
+                            android:id="@+id/tvProductDesc1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Professional minimalist designs tailored to your vision. High-quality ink and sterile environment guaranteed."
+                            android:textSize="14sp"
+                            android:textColor="#555555"
+                            android:layout_marginTop="6dp" />
+
+                        <TextView
+                            android:id="@+id/tvServicePrice1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R800.00"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/moes_forest_green"
+                            android:layout_marginTop="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="24dp">
+
+                            <Button
+                                android:id="@+id/btnBooking1"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:text="Booking"
+                                android:backgroundTint="@color/moes_forest_green"
+                                android:textColor="@color/white"
+                                app:cornerRadius="8dp" />
+
+                            <Space android:layout_width="match_parent" android:layout_height="12dp" />
+
+                            <Button
+                                android:id="@+id/btnAddToCart1"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:text="Add to Cart"
+                                android:textColor="@color/moes_forest_green"
+                                app:strokeColor="@color/moes_forest_green"
+                                app:cornerRadius="8dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Service Card 2: Piercing -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#DDDDDD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivServiceImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher"
+                        android:contentDescription="Ear Piercing" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/tvServiceName2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ear Piercing"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/moes_forest_green" />
+
+                        <TextView
+                            android:id="@+id/tvProductDesc2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Safe and professional ear piercing with sterile equipment and standard jewelry included."
+                            android:textSize="14sp"
+                            android:textColor="#555555"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvServicePrice2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R300.00"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/moes_forest_green"
+                            android:layout_marginTop="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="24dp">
+
+                            <Button
+                                android:id="@+id/btnBooking2"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:text="Booking"
+                                android:backgroundTint="@color/moes_forest_green"
+                                android:textColor="@color/white"
+                                app:cornerRadius="8dp" />
+
+                            <Space android:layout_width="match_parent" android:layout_height="12dp" />
+
+                            <Button
+                                android:id="@+id/btnAddToCart2"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:text="Add to Cart"
+                                android:textColor="@color/moes_forest_green"
+                                app:strokeColor="@color/moes_forest_green"
+                                app:cornerRadius="8dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

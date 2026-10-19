@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "816222431601",
+    "project_id": "moes-24f8a",
+    "storage_bucket": "moes-24f8a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816222431601:android:df044fbe2488f02d87aed0",
+        "android_client_info": {
+          "package_name": "com.example.moes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAlBv16qJ5DDTUvkVw5SUXlLTRv3pyVoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

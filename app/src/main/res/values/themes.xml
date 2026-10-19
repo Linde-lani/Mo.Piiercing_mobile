@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+
+<style name="Theme.Moes" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Primary brand color -->
+    <item name="colorPrimary">@color/moes_forest_green</item>
+    <item name="colorOnPrimary">@color/moes_gold</item>
+
+    <!-- Secondary brand color -->
+    <item name="colorSecondary">@color/moes_gold</item>
+    <item name="colorOnSecondary">@color/white</item>
+
+    <!-- Status bar and background -->
+    <item name="android:windowBackground">@color/moes_cream</item>
+    <item name="android:statusBarColor">@color/moes_dark_header</item>
+</style>
+
+<!-- Style for Product/Service Cards -->
+<style name="Widget.Moes.Card" parent="Widget.Material3.CardView.Elevated">
+    <item name="cardBackgroundColor">@color/white</item>
+    <item name="cardCornerRadius">12dp</item>
+    <item name="strokeColor">@color/moes_gold</item>
+    <item name="strokeWidth">1dp</item>
+</style>
+
+    <style name="CircleImage">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedImage">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="RoundedCorners">
+        <item name="cornerSize">12dp</item>
+    </style>
+</resources>

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light"
+    tools:context=".MainActivity">
+
+    <!-- Header Navigation Bar   android:id="@+id/navBar"-->
+    <!-- Header Navigation Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navBar"
+        android:background="@color/glass_white">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Mo Piiercings &amp; Co"
+            app:titleTextColor="@color/moes_forest_green" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="0dp">
+
+            <!-- HERO SECTION -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="64dp">
+
+                <!-- Background Image (Cinematic Studio Close-up) -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/luxury_studio_bg1"
+                    android:contentDescription="Hero Background" />
+
+                <!-- Dark Gradient Overlay for readability -->
+
+                <!-- Glassmorphism Card Overlay -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="24dp"
+                    app:cardBackgroundColor="@color/glass_white"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/moes_forest_green">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Express Yourself"
+                            android:textColor="@color/primary_black"
+                            android:textSize="32sp"
+                            android:textStyle="bold"
+                            android:fontFamily="serif" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Where Art Meets Identity"
+                            android:textColor="@color/text_dark"
+                            android:textSize="16sp"
+                            android:letterSpacing="0.1" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHeroBook"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Book Appointment"
+                            android:textColor="@color/glass_white"
+                            android:textStyle="bold"
+                            app:backgroundTint="@color/moes_forest_green"
+                            app:cornerRadius="12dp" />
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
+
+
+            <!-- TODAY'S PICKS SECTION -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+
+                    android:text="Today's Picks"
+                    android:textColor="@color/moes_forest_green"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="horizontal">
+
+                        <!-- Luxury Product Card Template -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="160dp"
+                            android:layout_height="220dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/ear_3"
+                            app:cardBackgroundColor="@color/moes_forest_green"
+                            app:cardCornerRadius="16dp"
+                            app:strokeColor="@color/accent_gold"
+                            app:strokeWidth="1dp">
+
+                            <!-- Card Content as before, but with Luxury Styling -->
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Luxury Product Card Template -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="160dp"
+                            android:layout_height="220dp"
+                            android:layout_marginEnd="16dp"
+                            app:cardBackgroundColor="@color/moes_forest_green"
+                            app:cardCornerRadius="16dp"
+                            app:strokeColor="@color/accent_gold"
+                            app:strokeWidth="1dp">
+
+                            <!-- Card Content as before, but with Luxury Styling -->
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Luxury Product Card Template -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="160dp"
+                            android:layout_height="220dp"
+                            android:layout_marginEnd="16dp"
+                            app:cardBackgroundColor="@color/moes_forest_green"
+                            app:cardCornerRadius="16dp"
+                            app:strokeColor="@color/accent_gold"
+                            app:strokeWidth="1dp">
+
+                            <!-- Card Content as before, but with Luxury Styling -->
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Repeat for other cards... -->
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/dashboardScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/cardview_default_elevation"
+                android:layout_marginBottom="100dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <!-- Products Section Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/cardview_default_elevation"
+                    android:text="Today's Pick's"
+                    android:textColor="@color/moes_forest_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Horizontal View for Product Images -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margintop="120dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/layoutProductCards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="horizontal">
+
+                        <!-- Product Card 1 -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="150dp"
+                            android:layout_height="180dp"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="12dp"
+
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/moes_forest_green"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="110dp"
+                                    android:contentDescription="jewelry_1"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/jewelry_1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Signature Dish"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Product Card 2 -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="150dp"
+                            android:layout_height="180dp"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/moes_forest_green"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="110dp"
+                                    android:contentDescription="Product 2"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/jewelry_2"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Special Combo"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Product Card 3 -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="150dp"
+                            android:layout_height="180dp"
+                            android:layout_marginEnd="12dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/moes_forest_green"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="110dp"
+                                    android:contentDescription="Product 3"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ear_1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Refreshing Drink"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Product Card 4 -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="150dp"
+                            android:layout_height="180dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/moes_forest_green"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="110dp"
+                                    android:contentDescription="Product 4"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ear_2" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Dessert Treat"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- Other Information Section -->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <!-- Scrollable main dashboard content area -->
+    <!-- Bottom Navigation Bar for 5 pages -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+
+        android:layout_alignParentBottom="true"
+        android:background="#22000000"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>
