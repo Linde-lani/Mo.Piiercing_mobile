@@ -68,7 +68,7 @@ class GalleryScreen : AppCompatActivity() {
         setupServiceActions(R.id.btnBookH2_1, R.id.btnCartH2_1, "Piercing Set B1", 300.0)
         setupServiceActions(R.id.btnBookH2_2, R.id.btnCartH2_2, "Piercing Set B2", 350.0)
         setupServiceActions(R.id.btnBookH2_3, R.id.btnCartH2_3, "Piercing Set B3", 400.0)
-        setupServiceActions(R.id.btnBookH2_4, R.id.btnCartH2_4, "Piercing Set B4", 450.0)
+        //setupServiceActions(R.id.btnBookH2_4, R.id.btnCartH2_4, "Piercing Set B4", 450.0)
         setupServiceActions(R.id.btnBookH2_5, R.id.btnCartH2_5, "Piercing Set B5", 500.0)
 
         // Vertical Services
