@@ -9,12 +9,16 @@
     tools:context=".GalleryScreen">
 
     <!-- Header -->
+
+    <!-- Bottom Navigation -->
+
     <RelativeLayout
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:padding="16dp"
-        android:background="@color/white">
+        app:strokeColor="@color/moes_forest_green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,7 +29,6 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
