@@ -653,7 +653,7 @@
                                 android:id="@+id/btnBooking1"
                                 android:layout_width="match_parent"
                                 android:layout_height="56dp"
-                                android:text="Booking"
+                                android:text="@string/booking"
                                 android:backgroundTint="@color/moes_forest_green"
                                 android:textColor="@color/white"
                                 app:cornerRadius="8dp" />
