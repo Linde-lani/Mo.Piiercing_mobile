@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class ProfileScreen : AppCompatActivity() {
 
@@ -47,11 +46,10 @@ class ProfileScreen : AppCompatActivity() {
         val userId = auth.currentUser?.uid ?: return
         val container = findViewById<LinearLayout>(R.id.appointmentContainer)
 
-        // Fetch bookings for the current user, ordered by date
+        // Fetch bookings for the current user
         db.collection("bookings")
             .whereEqualTo("userId", userId)
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .limit(5)
+            .limit(10)
             .get()
             .addOnSuccessListener { documents ->
                 container.removeAllViews() // Clear the "Loading..." state
@@ -116,9 +114,7 @@ class ProfileScreen : AppCompatActivity() {
             // Modern way to get color (replaces deprecated method)
             setTextColor(androidx.core.content.ContextCompat.getColor(this@ProfileScreen, android.R.color.black))
 
-            // Apply different backgrounds based on status
-            setBackgroundResource(if (status.equals("confirmed", ignoreCase = true))
-                R.drawable.bg_status_confirmed else R.drawable.bg_status_pending)
+
         }
 
         row.addView(tvDate)
@@ -139,16 +135,28 @@ class ProfileScreen : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_profile // Highlight profile icon
 
         bottomNav.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.nav_profile) return@setOnItemSelectedListener true
             when (item.itemId) {
                 R.id.nav_home -> {
                     startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                     true
                 }
                 R.id.nav_booking -> {
                     startActivity(Intent(this, BookingScreen::class.java))
+                    finish()
                     true
                 }
-                R.id.nav_profile -> true // Already here
+                R.id.nav_gallery -> {
+                    startActivity(Intent(this, GalleryScreen::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_settings -> {
+                    startActivity(Intent(this, SettingsScreen::class.java))
+                    finish()
+                    true
+                }
                 else -> false
             }
         }

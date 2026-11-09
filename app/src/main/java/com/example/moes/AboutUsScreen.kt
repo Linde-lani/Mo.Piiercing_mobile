@@ -25,7 +25,7 @@ class AboutUsScreen : AppCompatActivity() {
             insets
         }
 
-        setupNavigation(R.id.nav_about)
+        setupNavigation(R.id.nav_settings)
     }
 
     private fun setupNavigation(currentItemId: Int) {
@@ -49,7 +49,7 @@ class AboutUsScreen : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_about -> {
+                R.id.nav_settings -> {
                     startActivity(Intent(this, AboutUsScreen::class.java))
                     finish()
                     true

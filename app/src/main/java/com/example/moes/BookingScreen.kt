@@ -112,10 +112,50 @@ class BookingScreen : AppCompatActivity() {
             picker.addOnPositiveButtonClickListener { selection ->
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
                 calendar.timeInMillis = selection
-                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                etDate.setText(format.format(calendar.time))
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = format.format(calendar.time)
+                etDate.setText(formattedDate)
+                checkBookedSlots(formattedDate)
             }
         }
+    }
+
+    private fun checkBookedSlots(date: String) {
+        // Reset all chips to enabled and full opacity
+        for (i in 0 until chipGroupTime.childCount) {
+            val chip = chipGroupTime.getChildAt(i) as? Chip
+            chip?.isEnabled = true
+            chip?.alpha = 1.0f
+        }
+
+        // Query Firestore for bookings on this date
+        db.collection("bookingSlots")
+            .whereEqualTo("date", date)
+            .get()
+            .addOnSuccessListener { documents ->
+                val bookedTimes = mutableSetOf<String>()
+                for (doc in documents) {
+                    val time = doc.getString("time")
+                    if (time != null) {
+                        bookedTimes.add(time)
+                    }
+                }
+
+                // Disable chips that match booked times
+                for (i in 0 until chipGroupTime.childCount) {
+                    val chip = chipGroupTime.getChildAt(i) as? Chip
+                    if (chip != null && bookedTimes.contains(chip.text.toString())) {
+                        chip.isEnabled = false
+                        chip.alpha = 0.4f
+                        if (chip.isChecked) {
+                            chip.isChecked = false
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error checking availability: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     /**
@@ -124,7 +164,10 @@ class BookingScreen : AppCompatActivity() {
     private fun handleBooking() {
         val selectedChipId = chipGroupTime.checkedChipId
 
-
+        if (etDate.text.isNullOrBlank()) {
+            Toast.makeText(this, "Please select a preferred date first", Toast.LENGTH_SHORT).show()
+            return
+        }
         // Validation logic
         if (etPhone.text.isNullOrBlank()) {
             etPhone.error = "Phone number required"
@@ -139,7 +182,6 @@ class BookingScreen : AppCompatActivity() {
             return
         }
 
-
         val selectedTime = findViewById<Chip>(selectedChipId).text.toString()
         saveBookingToFirestore(selectedTime)
     }
@@ -147,26 +189,43 @@ class BookingScreen : AppCompatActivity() {
     private fun saveBookingToFirestore(time: String) {
         val userId = auth.currentUser?.uid ?: return
         val userName = etName.text.toString()
+        val date = etDate.text.toString()
 
-        val booking = hashMapOf(
-            "userId" to userId,
-            "name" to userName,
-            "email" to etEmail.text.toString(),
-            "phone" to etPhone.text.toString(),
-            "service" to spinnerService.text.toString(),
-            "date" to etDate.text.toString(),
-            "time" to time,
-            "notes" to etNotes.text.toString(),
-            "status" to "Confirmed",
-            "timestamp" to com.google.firebase.Timestamp.now()
-        )
+        // Double check availability before saving to prevent race conditions
+        db.collection("bookingSlots")
+            .whereEqualTo("date", date)
+            .whereEqualTo("time", time)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    Toast.makeText(this, "Sorry, this time slot was just booked by someone else. Please choose another.", Toast.LENGTH_LONG).show()
+                    checkBookedSlots(date)
+                    return@addOnSuccessListener
+                }
 
-        db.collection("bookings").add(booking)
-            .addOnSuccessListener {
-                val intent = Intent(this, BookingConfirmationActivity::class.java)
-                intent.putExtra("USER_NAME", userName)
-                startActivity(intent)
-                finish()
+                val booking = hashMapOf(
+                    "userId" to userId,
+                    "name" to userName,
+                    "email" to etEmail.text.toString(),
+                    "phone" to etPhone.text.toString(),
+                    "service" to spinnerService.text.toString(),
+                    "date" to date,
+                    "time" to time,
+                    "notes" to etNotes.text.toString(),
+                    "status" to "Pending",
+                    "timestamp" to com.google.firebase.Timestamp.now()
+                )
+
+                db.collection("bookings").add(booking)
+                    .addOnSuccessListener {
+                        val intent = Intent(this, BookingConfirmationActivity::class.java)
+                        intent.putExtra("USER_NAME", userName)
+                        startActivity(intent)
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -190,7 +249,7 @@ class BookingScreen : AppCompatActivity() {
                 R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
                 R.id.nav_booking -> return@setOnItemSelectedListener true
                 R.id.nav_gallery -> startActivity(Intent(this, GalleryScreen::class.java))
-                R.id.nav_about -> startActivity(Intent(this, AboutUsScreen::class.java))
+                R.id.nav_profile -> startActivity(Intent(this, ProfileScreen::class.java))
                 R.id.nav_settings -> startActivity(Intent(this, SettingsScreen::class.java))
             }
             finish()
