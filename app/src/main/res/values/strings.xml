@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">moes</string>
     <string name="default_web_client_id" translatable="false">816222431601-hlvppma65uvcu339pggmjbg2i57jn6je.apps.googleusercontent.com</string>
+    <string name="booking">Booking</string>
 </resources>

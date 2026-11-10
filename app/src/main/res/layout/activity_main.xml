@@ -8,7 +8,6 @@
     android:background="@color/bg_light"
     tools:context=".MainActivity">
 
-    <!-- Header Navigation Bar   android:id="@+id/navBar"-->
     <!-- Header Navigation Bar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,12 +15,31 @@
         android:id="@+id/navBar"
         android:background="@color/glass_white">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Mo Piiercings &amp; Co"
-            app:titleTextColor="@color/moes_forest_green" />
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title="Mo Piiercings &amp; Co"
+                app:titleTextColor="@color/moes_forest_green" />
+
+            <ImageButton
+                android:id="@+id/btnCart"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Cart"
+                android:src="@android:drawable/ic_menu_view"
+                app:tint="@color/moes_forest_green"
+                />
+
+        </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -49,8 +67,6 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/luxury_studio_bg1"
                     android:contentDescription="Hero Background" />
-
-                <!-- Dark Gradient Overlay for readability -->
 
                 <!-- Glassmorphism Card Overlay -->
                 <com.google.android.material.card.MaterialCardView
@@ -140,16 +156,12 @@
                             android:layout_width="160dp"
                             android:layout_height="220dp"
                             android:layout_marginEnd="16dp"
-                            android:src="@drawable/ear_3"
                             app:cardBackgroundColor="@color/moes_forest_green"
                             app:cardCornerRadius="16dp"
                             app:strokeColor="@color/accent_gold"
                             app:strokeWidth="1dp">
-
-                            <!-- Card Content as before, but with Luxury Styling -->
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Luxury Product Card Template -->
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="160dp"
                             android:layout_height="220dp"
@@ -158,11 +170,8 @@
                             app:cardCornerRadius="16dp"
                             app:strokeColor="@color/accent_gold"
                             app:strokeWidth="1dp">
-
-                            <!-- Card Content as before, but with Luxury Styling -->
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Luxury Product Card Template -->
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="160dp"
                             android:layout_height="220dp"
@@ -171,11 +180,8 @@
                             app:cardCornerRadius="16dp"
                             app:strokeColor="@color/accent_gold"
                             app:strokeWidth="1dp">
-
-                            <!-- Card Content as before, but with Luxury Styling -->
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Repeat for other cards... -->
                     </LinearLayout>
                 </HorizontalScrollView>
 
@@ -212,7 +218,7 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="20dp"
                     android:scrollbars="none">
 
                     <LinearLayout
@@ -228,7 +234,6 @@
                             android:layout_height="180dp"
                             android:layout_marginEnd="12dp"
                             app:cardCornerRadius="12dp"
-
                             app:cardElevation="4dp">
 
                             <LinearLayout
@@ -357,24 +362,17 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <!-- Other Information Section -->
-
             </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-
-
-
-    <!-- Scrollable main dashboard content area -->
     <!-- Bottom Navigation Bar for 5 pages -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-
         android:layout_alignParentBottom="true"
         android:background="#22000000"
         app:itemIconTint="@color/moes_forest_green"

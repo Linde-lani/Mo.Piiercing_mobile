@@ -190,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:backgroundTint="@color/moes_forest_green"
-                android:text="Confirm Booking"
+                android:text="@string/booking"
                 android:textColor="@color/white"
                 app:cornerRadius="12dp" />
 

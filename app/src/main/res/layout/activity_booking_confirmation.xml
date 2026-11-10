@@ -45,6 +45,17 @@
         android:gravity="center" />
 
     <Button
+        android:id="@+id/btnProceedCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:text="Proceed to Checkout"
+        android:textSize="18sp"
+        android:backgroundTint="@color/moes_forest_green"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp" />
+
+    <Button
         android:id="@+id/btnBackToGallery"
         android:layout_width="match_parent"
         android:layout_height="56dp"

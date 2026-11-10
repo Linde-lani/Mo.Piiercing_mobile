@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moes">
         <activity
+            android:name=".CheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".item_cart_card"
             android:exported="false" />
         <activity

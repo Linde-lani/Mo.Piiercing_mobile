@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white"
+    tools:context=".CheckoutActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Checkout &amp; Payment"
+            android:textColor="@color/moes_forest_green"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- Billing Address -->
+        <EditText
+            android:id="@+id/edtBillingAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Billing Address"
+            android:inputType="textPostalAddress" />
+
+        <!-- Credit Card Number -->
+        <EditText
+            android:id="@+id/edtCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Credit Card Number"
+            android:inputType="number"
+            android:maxLength="16" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <!-- Expiry Date -->
+            <EditText
+                android:id="@+id/edtExpiry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:hint="MM/YY"
+                android:inputType="text"
+                android:maxLength="5" />
+
+            <!-- CVV -->
+            <EditText
+                android:id="@+id/edtCvv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:hint="CVV"
+                android:inputType="numberPassword"
+                android:maxLength="4" />
+
+        </LinearLayout>
+
+        <!-- Complete Payment Button -->
+        <Button
+            android:id="@+id/btnCompletePayment"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Complete Payment"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/moes_forest_green"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>

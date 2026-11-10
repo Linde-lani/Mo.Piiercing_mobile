@@ -63,17 +63,22 @@
             android:hint="Confirm Password"
             android:inputType="textPassword" />
 
-        <RadioGroup    android:id="@+id/rgRole"
+        <!-- Role Selection -->
+        <RadioGroup
+            android:id="@+id/rgRole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
 
             <RadioButton
                 android:id="@+id/rbUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User"
-                android:checked="true" />
+                android:checked="true"
+                android:layout_marginEnd="32dp" />
 
             <RadioButton
                 android:id="@+id/rbAdmin"
@@ -96,7 +101,19 @@
             android:textColor="@color/moes_gold"
             app:cornerRadius="12dp" />
 
-
+        <!-- Google Sign-Up Button -->
+        <Button
+            android:id="@+id/btnGoogleSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="Sign up with Google"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            app:cornerRadius="12dp"
+            android:onClick="signUpWithGoogle" />
 
         <!-- Login Redirect -->
         <TextView

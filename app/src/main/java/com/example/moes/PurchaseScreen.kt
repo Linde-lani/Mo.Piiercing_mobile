@@ -22,7 +22,7 @@ data class CartItem(
     val imageUrl: String = ""
 )
 
-class PurchaseScreen : AppCompatActivity() {
+open class PurchaseScreen : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
@@ -49,12 +49,11 @@ class PurchaseScreen : AppCompatActivity() {
 
         loadCartItems()
 
-//        findViewById<Button>(R.id.btnPayNow).setOnClickListener {
-//            // Navigate to PaymentActivity (ensure this activity exists)
-//            val intent = Intent(this, PaymentActivity::class.java)
-//            intent.putExtra("TOTAL_PRICE", subtotalPrice)
-//            startActivity(intent)
-//        }
+        findViewById<Button>(R.id.btnPayNow).setOnClickListener {
+            val intent = Intent(this, CheckoutActivity::class.java)
+            intent.putExtra("TOTAL_PRICE", subtotalPrice)
+            startActivity(intent)
+        }
 
         findViewById<Button>(R.id.btnContinue).setOnClickListener {
             finish() // Returns to the previous screen (Gallery)
@@ -64,7 +63,7 @@ class PurchaseScreen : AppCompatActivity() {
     private fun loadCartItems() {
         val userId = auth.currentUser?.uid ?: return
 
-        db.collection("carts").document(userId).collection("items")
+        db.collection("users").document(userId).collection("cart")
             .get()
             .addOnSuccessListener { documents ->
                 cartItemsContainer.removeAllViews()
@@ -128,14 +127,14 @@ class PurchaseScreen : AppCompatActivity() {
 
     private fun updateQuantity(itemId: String, newQty: Int) {
         val userId = auth.currentUser?.uid ?: return
-        db.collection("carts").document(userId).collection("items").document(itemId)
+        db.collection("users").document(userId).collection("cart").document(itemId)
             .update("quantity", newQty)
             .addOnSuccessListener { loadCartItems() }
     }
 
     private fun removeItem(itemId: String) {
         val userId = auth.currentUser?.uid ?: return
-        db.collection("carts").document(userId).collection("items").document(itemId)
+        db.collection("users").document(userId).collection("cart").document(itemId)
             .delete()
             .addOnSuccessListener { loadCartItems() }
     }

@@ -26,6 +26,12 @@ class BookingConfirmationActivity : AppCompatActivity() {
         val tvThankYou = findViewById<TextView>(R.id.tvThankYou)
         tvThankYou.text = "Thank you, $userName!"
 
+        val btnProceedCheckout = findViewById<Button>(R.id.btnProceedCheckout)
+        btnProceedCheckout.setOnClickListener {
+            val intent = Intent(this, CheckoutActivity::class.java)
+            startActivity(intent)
+        }
+
         val btnBackToGallery = findViewById<Button>(R.id.btnBackToGallery)
         btnBackToGallery.setOnClickListener {
             val intent = Intent(this, GalleryScreen::class.java)
