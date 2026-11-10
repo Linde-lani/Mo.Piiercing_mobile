@@ -114,7 +114,6 @@ class ProfileScreen : AppCompatActivity() {
             // Modern way to get color (replaces deprecated method)
             setTextColor(androidx.core.content.ContextCompat.getColor(this@ProfileScreen, android.R.color.black))
 
-
         }
 
         row.addView(tvDate)
