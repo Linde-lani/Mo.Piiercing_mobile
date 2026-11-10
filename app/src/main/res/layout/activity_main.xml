@@ -75,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Express Yourself"
-                            android:textColor="@color/primary_black"
+                            android:textColor="@color/moes_forest_green"
                             android:textSize="32sp"
                             android:textStyle="bold"
                             android:fontFamily="serif" />
@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Where Art Meets Identity"
-                            android:textColor="@color/text_dark"
+                            android:textColor="@color/moes_forest_green"
                             android:textSize="16sp"
                             android:letterSpacing="0.1" />
 

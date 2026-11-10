@@ -287,8 +287,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#22000000"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>

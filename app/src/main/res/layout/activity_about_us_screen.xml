@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/black">
+        android:background="@color/moes_forest_green">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,8 +31,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-2dp"
         android:background="#22000000"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="About Moe's"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Founded in 2018, Mo's Piercings has been serving the community with passion, professionalism, and a commitment to body art excellence. Based in Braamfontein, Johannesburg, we offer piercings, tattoos, tooth gems, and premium jewelry in a welcoming and creative studio space."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Our founder, Mo, has over 15 years of experience in the body art industry. Her vision was to create a safe, welcoming, and creative space where clients could express themselves through body modification."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Our Mission"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="To provide high-quality body art services in a clean, professional, and inclusive environment while prioritizing client safety, comfort, and satisfaction."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Why Choose Us?"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sterile and Safety: We use only sterile, single-use equipment and follow all health regulations"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="6dp"
                 android:layout_marginBottom="24dp" />
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sterile and Safety: We use only sterile, single-use equipment and follow all health regulations"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="6dp"
                 android:layout_marginBottom="24dp" />
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Custom Designs: Personalized consultations for your unique vision."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Affordable Pricing: Competitive rates without compromising quality"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Excellent Aftercare: Detailed instructions and support for proper healing"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Welcoming Atmosphere: A judgment-free zone for all body art enthusiasts"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Our Certifications and Credentials"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -173,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ Certified Professional Piercer"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -182,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ Professional Tattoo Artist"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ Health and Safety Protocol Training"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -200,7 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ Sterile Processing Standards"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -209,7 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ First Aid and CPR Certified"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -218,7 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="✓ Fully Licensed Business"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Health and Safety Standards"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -236,7 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="We maintain the highest standards of hygiene and safety. All equipment is sterilized using state-of-the-art methods, and we use only disposable, single-use needles. We follow all local health and safety regulations for body art establishments."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -246,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Our Commitment to You"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -255,7 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Every client deserves to feel confident and cared for. We take time to understand your vision, answer all your questions, and ensure you have the best experience possible. Your safety and satisfaction are our top priorities."
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginBottom="24dp" />
@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Get in Touch"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp" />
@@ -274,7 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phone: +1 (555) 123-4567\nEmail: support@moes.com\nAddress: 123 Main Street, Cityville"
-                android:textColor="@color/black"
+                android:textColor="@color/moes_forest_green"
                 android:textSize="16sp"
                 android:lineSpacingExtra="6dp"
                 android:layout_marginBottom="24dp" />
