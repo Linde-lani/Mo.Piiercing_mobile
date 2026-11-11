@@ -17,7 +17,6 @@ class SettingsScreen : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var tvUserEmailSettings: TextView
     private lateinit var btnLogout: Button
-    private lateinit var btnAdminPanel: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,19 +32,10 @@ class SettingsScreen : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         tvUserEmailSettings = findViewById(R.id.tvUserEmailSettings)
         btnLogout = findViewById(R.id.btnLogout)
-        btnAdminPanel = findViewById(R.id.btnAdminPanel)
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
             tvUserEmailSettings.text = "Logged in as: ${currentUser.email}"
-            
-            // Basic role check: show admin button only for a specific email or role
-            // For now, we show it to everyone for development, or you can restrict it:
-            // btnAdminPanel.visibility = if (currentUser.email == "admin@moes.com") View.VISIBLE else View.GONE
-        }
-
-        btnAdminPanel.setOnClickListener {
-            startActivity(Intent(this, AdminScreen::class.java))
         }
 
         btnLogout.setOnClickListener {
