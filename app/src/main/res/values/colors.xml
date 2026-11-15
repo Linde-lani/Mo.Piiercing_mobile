@@ -23,4 +23,23 @@
         <color name="text_dark">#222222</color>
         <color name="glass_white">#CCFFFFFF</color> <!-- For Glassmorphism -->
 
+    <!-- Dark Theme & Messages Colors -->
+    <color name="dark_bg">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="dark_card_bg">#262626</color>
+    <color name="dark_card_stroke">#3A3A3A</color>
+    <color name="dark_text_primary">#FFFFFF</color>
+    <color name="dark_text_secondary">#B0B0B0</color>
+
+    <!-- Status Badges -->
+    <color name="status_new_bg">#1E88E5</color>
+    <color name="status_read_bg">#FB8C00</color>
+    <color name="status_resolved_bg">#4CAF50</color>
+    <color name="status_text_color">#FFFFFF</color>
+
+    <color name="status_pending_bg">#FB8C00</color>
+    <color name="status_confirmed_bg">#4CAF50</color>
+    <color name="status_cancelled_bg">#E53935</color>
+    <color name="status_declined_bg">#757575</color>
+
 </resources>

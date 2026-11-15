@@ -2,30 +2,46 @@ package com.example.moes
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.moes.databinding.ActivityGalleryScreenBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
+/**
+ * Customer Gallery Activity displaying dynamic Firebase Firestore products organized in horizontal sections,
+ * Category Chips, Search, Wishlist integration, and real-time Cart state.
+ */
 class GalleryScreen : AppCompatActivity() {
 
+    private lateinit var binding: ActivityGalleryScreenBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-    private lateinit var cartCard: MaterialCardView
-    private lateinit var tvCartSummary: TextView
+
+    private lateinit var featuredTattoosAdapter: TattooAdapter
+    private lateinit var featuredJewelleryAdapter: JewelleryAdapter
+    private lateinit var newArrivalsAdapter: GalleryAdapter
+    private lateinit var bestSellersAdapter: GalleryAdapter
+    private lateinit var recommendedAdapter: GalleryAdapter
+
+    private val allProductsList = mutableListOf<Product>()
+    private var currentSearchQuery: String = ""
+    private var selectedCategory: String = "All"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
@@ -36,97 +52,237 @@ class GalleryScreen : AppCompatActivity() {
         }
 
         enableEdgeToEdge()
-        setContentView(R.layout.activity_gallery_screen)
-        
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        binding = ActivityGalleryScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        cartCard = findViewById(R.id.cartCard)
-        tvCartSummary = findViewById(R.id.tvCartSummary)
-
+        setupRecyclerViews()
+        setupSearchAndChips()
         setupNavigation(R.id.nav_gallery)
-        initClickListeners()
-        listenToCartUpdates()
-        
-        findViewById<Button>(R.id.btnViewCart).setOnClickListener {
+
+        binding.btnWishlistHeader.setOnClickListener {
+            startActivity(Intent(this, WishlistActivity::class.java))
+        }
+
+        binding.btnViewCart.setOnClickListener {
             startActivity(Intent(this, cart::class.java))
         }
+
+        setupSwipeToRefresh()
+        listenToCartUpdates()
+        listenToFirestoreProducts()
     }
 
-    private fun initClickListeners() {
-        // Horizontal Collection 1 (Flash Tattoos)
-        setupServiceActions(R.id.btnBookH1_1, R.id.btnCartH1_1, "Flash Art A1", 650.0)
-        setupServiceActions(R.id.btnBookH1_2, R.id.btnCartH1_2, "Flash Art A2", 750.0)
-        setupServiceActions(R.id.btnBookH1_3, R.id.btnCartH1_3, "Flash Art A3", 850.0)
-        setupServiceActions(R.id.btnBookH1_4, R.id.btnCartH1_4, "Flash Art A4", 950.0)
-        setupServiceActions(R.id.btnBookH1_5, R.id.btnCartH1_5, "Flash Art A5", 1050.0)
+    private fun setupRecyclerViews() {
+        // 1. Featured Tattoos
+        featuredTattoosAdapter = TattooAdapter(
+            isAdmin = false,
+            onProductClick = { openProductDetail(it) },
+            onBookClick = { bookProduct(it) },
+            onAddToCartClick = { addToCart(it) },
+            onWishlistClick = { toggleWishlist(it) }
+        )
+        binding.rvFeaturedTattoos.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvFeaturedTattoos.adapter = featuredTattoosAdapter
 
-        // Horizontal Collection 2 (Popular Piercings)
-        setupServiceActions(R.id.btnBookH2_1, R.id.btnCartH2_1, "Piercing Set B1", 300.0)
-        setupServiceActions(R.id.btnBookH2_2, R.id.btnCartH2_2, "Piercing Set B2", 350.0)
-        setupServiceActions(R.id.btnBookH2_3, R.id.btnCartH2_3, "Piercing Set B3", 400.0)
-        //setupServiceActions(R.id.btnBookH2_4, R.id.btnCartH2_4, "Piercing Set B4", 450.0)
-        setupServiceActions(R.id.btnBookH2_5, R.id.btnCartH2_5, "Piercing Set B5", 500.0)
+        // 2. Featured Jewellery
+        featuredJewelleryAdapter = JewelleryAdapter(
+            isAdmin = false,
+            onProductClick = { openProductDetail(it) },
+            onBookClick = { bookProduct(it) },
+            onAddToCartClick = { addToCart(it) },
+            onWishlistClick = { toggleWishlist(it) }
+        )
+        binding.rvFeaturedJewellery.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvFeaturedJewellery.adapter = featuredJewelleryAdapter
 
-        // Vertical Services
-        setupServiceActions(R.id.btnBooking1, R.id.btnAddToCart1, "Small Custom Tattoo", 800.0)
-        setupServiceActions(R.id.btnBooking2, R.id.btnAddToCart2, "Ear Piercing", 300.0)
+        // 3. New Arrivals
+        newArrivalsAdapter = GalleryAdapter(
+            isAdmin = false,
+            onProductClick = { openProductDetail(it) },
+            onBookClick = { bookProduct(it) },
+            onAddToCartClick = { addToCart(it) },
+            onWishlistClick = { toggleWishlist(it) }
+        )
+        binding.rvNewArrivals.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvNewArrivals.adapter = newArrivalsAdapter
+
+        // 4. Best Sellers
+        bestSellersAdapter = GalleryAdapter(
+            isAdmin = false,
+            onProductClick = { openProductDetail(it) },
+            onBookClick = { bookProduct(it) },
+            onAddToCartClick = { addToCart(it) },
+            onWishlistClick = { toggleWishlist(it) }
+        )
+        binding.rvBestSellers.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvBestSellers.adapter = bestSellersAdapter
+
+        // 5. Recommended For You
+        recommendedAdapter = GalleryAdapter(
+            isAdmin = false,
+            onProductClick = { openProductDetail(it) },
+            onBookClick = { bookProduct(it) },
+            onAddToCartClick = { addToCart(it) },
+            onWishlistClick = { toggleWishlist(it) }
+        )
+        binding.rvRecommended.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvRecommended.adapter = recommendedAdapter
     }
 
-    private fun setupServiceActions(bookId: Int, cartId: Int, name: String, price: Double) {
-        findViewById<Button>(bookId)?.setOnClickListener {
-            val intent = Intent(this, BookingScreen::class.java)
-            intent.putExtra("SELECTED_SERVICE", name)
-            startActivity(intent)
+    private fun setupSearchAndChips() {
+        binding.etSearchCustomer.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                currentSearchQuery = s?.toString()?.trim() ?: ""
+                filterAndDistributeProducts()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        binding.chipGroupCategories.setOnCheckedStateChangeListener { group, checkedIds ->
+            if (checkedIds.isNotEmpty()) {
+                val chip = group.findViewById<Chip>(checkedIds[0])
+                selectedCategory = chip?.text?.toString() ?: "All"
+                filterAndDistributeProducts()
+            }
         }
-        findViewById<Button>(cartId)?.setOnClickListener {
-            addToCart(name, price)
+    }
+
+    private fun setupSwipeToRefresh() {
+        binding.swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(this, R.color.moes_gold),
+            ContextCompat.getColor(this, R.color.moes_forest_green)
+        )
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            listenToFirestoreProducts()
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
-    private fun addToCart(name: String, price: Double) {
+    /**
+     * Listens to Firestore `products` collection for real-time updates.
+     */
+    private fun listenToFirestoreProducts() {
+        db.collection("products")
+            .whereEqualTo("active", true)
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    Toast.makeText(this, "Error loading gallery products", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+
+                val items = snapshots?.documents?.mapNotNull { doc ->
+                    doc.toObject(Product::class.java)?.apply { productId = doc.id }
+                } ?: emptyList()
+
+                allProductsList.clear()
+                allProductsList.addAll(items)
+
+                filterAndDistributeProducts()
+            }
+    }
+
+    /**
+     * Filters products by category & search term, then distributes to the 5 horizontal sections.
+     */
+    private fun filterAndDistributeProducts() {
+        val filtered = allProductsList.filter { prod ->
+            val matchesCategory = when (selectedCategory) {
+                "All" -> true
+                "Tattoos" -> prod.category.contains("Tattoo", ignoreCase = true)
+                "Jewellery" -> !prod.category.contains("Tattoo", ignoreCase = true)
+                "Featured" -> prod.featured
+                else -> prod.category.equals(selectedCategory, ignoreCase = true)
+            }
+
+            val matchesSearch = if (currentSearchQuery.isEmpty()) true else {
+                prod.name.contains(currentSearchQuery, ignoreCase = true) ||
+                        prod.description.contains(currentSearchQuery, ignoreCase = true) ||
+                        prod.category.contains(currentSearchQuery, ignoreCase = true)
+            }
+
+            matchesCategory && matchesSearch
+        }
+
+        val featuredTattoos = filtered.filter { it.category.contains("Tattoo", ignoreCase = true) && it.featured }
+        val featuredJewellery = filtered.filter { !it.category.contains("Tattoo", ignoreCase = true) && it.featured }
+        val newArrivals = filtered.filter { it.isNew || (System.currentTimeMillis() - it.createdAt) < (7 * 24 * 60 * 60 * 1000L) }
+        val bestSellers = filtered.filter { it.bestSeller }
+        val recommended = filtered.take(10)
+
+        featuredTattoosAdapter.submitList(if (featuredTattoos.isNotEmpty()) featuredTattoos else filtered.filter { it.category.contains("Tattoo", ignoreCase = true) })
+        featuredJewelleryAdapter.submitList(if (featuredJewellery.isNotEmpty()) featuredJewellery else filtered.filter { !it.category.contains("Tattoo", ignoreCase = true) })
+        newArrivalsAdapter.submitList(if (newArrivals.isNotEmpty()) newArrivals else filtered)
+        bestSellersAdapter.submitList(if (bestSellers.isNotEmpty()) bestSellers else filtered.reversed())
+        recommendedAdapter.submitList(recommended)
+    }
+
+    private fun openProductDetail(product: Product) {
+        val intent = Intent(this, ProductDetailActivity::class.java)
+        intent.putExtra("EXTRA_PRODUCT", product)
+        startActivity(intent)
+    }
+
+    private fun bookProduct(product: Product) {
+        val intent = Intent(this, BookingScreen::class.java)
+        intent.putExtra("SELECTED_SERVICE", product.name)
+        startActivity(intent)
+    }
+
+    private fun addToCart(product: Product) {
         val userId = auth.currentUser?.uid ?: return
         val cartItem = hashMapOf(
-            "name" to name,
-            "price" to price,
+            "name" to product.name,
+            "price" to product.price,
+            "imageUrl" to product.imageUrl,
             "timestamp" to com.google.firebase.Timestamp.now()
         )
 
         db.collection("users").document(userId).collection("cart")
             .add(cartItem)
             .addOnSuccessListener {
-                Toast.makeText(this, "$name added to cart", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "${product.name} added to Cart!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun toggleWishlist(product: Product) {
+        val userId = auth.currentUser?.uid ?: return
+        val ref = db.collection("users").document(userId).collection("wishlist").document(product.productId)
+
+        ref.get().addOnSuccessListener { doc ->
+            if (doc.exists()) {
+                ref.delete().addOnSuccessListener {
+                    Toast.makeText(this, "Removed from Wishlist", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                ref.set(product).addOnSuccessListener {
+                    Toast.makeText(this, "Added to Wishlist!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun listenToCartUpdates() {
         val userId = auth.currentUser?.uid ?: return
         db.collection("users").document(userId).collection("cart")
-            .orderBy("timestamp", Query.Direction.DESCENDING)
-            .addSnapshotListener { snapshots, e ->
-                if (e != null) return@addSnapshotListener
-                
-                if (snapshots == null || snapshots.isEmpty) {
-                    cartCard.visibility = View.GONE
-                    return@addSnapshotListener
-                }
+            .addSnapshotListener { snapshots, _ ->
+                val count = snapshots?.size() ?: 0
+                val totalPrice = snapshots?.documents?.sumOf { doc ->
+                    doc.getDouble("price") ?: 0.0
+                } ?: 0.0
 
-                val itemNames = snapshots.documents.mapNotNull { it.getString("name") }
-                val totalPrice = snapshots.documents.sumOf { it.getDouble("price") ?: 0.0 }
-                
-                cartCard.visibility = View.VISIBLE
-                
-                // Show a comma-separated list of selected item names
-                val summaryText = if (itemNames.size > 2) {
-                    "${itemNames.take(2).joinToString(", ")} + ${itemNames.size - 2} more • Total: R$totalPrice"
-                } else {
-                    "${itemNames.joinToString(", ")} • Total: R$totalPrice"
-                }
-                
-                tvCartSummary.text = summaryText
+                binding.tvCartSummary.text = "Cart: $count items | Total: R${String.format("%.2f", totalPrice)}"
             }
     }
 
@@ -136,14 +292,29 @@ class GalleryScreen : AppCompatActivity() {
         bottomNav?.setOnItemSelectedListener { item ->
             if (item.itemId == currentItemId) return@setOnItemSelectedListener true
             when (item.itemId) {
-                R.id.nav_home -> startActivity(Intent(this, MainActivity::class.java))
-                R.id.nav_booking -> startActivity(Intent(this, BookingScreen::class.java))
+                R.id.nav_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_booking -> {
+                    startActivity(Intent(this, BookingScreen::class.java))
+                    finish()
+                    true
+                }
                 R.id.nav_gallery -> true
-                R.id.nav_profile -> startActivity(Intent(this, ProfileScreen::class.java))
-                R.id.nav_settings -> startActivity(Intent(this, SettingsScreen::class.java))
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ProfileScreen::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_settings -> {
+                    startActivity(Intent(this, SettingsScreen::class.java))
+                    finish()
+                    true
+                }
+                else -> false
             }
-            finish()
-            true
         }
     }
 }

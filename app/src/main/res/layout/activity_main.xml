@@ -31,13 +31,11 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Cart"
                 android:src="@android:drawable/ic_menu_view"
-                app:tint="@color/moes_forest_green"
-                />
+                app:tint="@color/moes_forest_green" />
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>

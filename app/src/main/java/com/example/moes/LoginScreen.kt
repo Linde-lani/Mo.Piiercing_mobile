@@ -155,7 +155,7 @@ class LoginScreen : AppCompatActivity() {
                     
                     if (role == "admin") {
                         Toast.makeText(this, "Welcome Admin", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, AdminScreen::class.java))
+                        startActivity(Intent(this, AdminMain::class.java))
                     } else {
                         Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, MainActivity::class.java))
