@@ -366,7 +366,7 @@
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_admin_product" />
+                        tools:listitem="@layout/product_preview_item" />
 
                     <!-- Section 2: Featured Jewellery Panel -->
                     <TextView
@@ -388,7 +388,7 @@
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_admin_product" />
+                        tools:listitem="@layout/product_preview_item" />
 
                     <!-- Section 3: All Products List -->
                     <TextView
@@ -410,7 +410,7 @@
                         android:paddingEnd="8dp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="2"
-                        tools:listitem="@layout/item_admin_product" />
+                        tools:listitem="@layout/product_preview_item" />
 
                 </LinearLayout>
 
