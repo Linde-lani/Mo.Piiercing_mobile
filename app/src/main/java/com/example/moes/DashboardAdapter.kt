@@ -287,10 +287,7 @@ class ProductPreviewAdapter(
                 binding.tvLowStockBadge.visibility = View.GONE
             }
 
-            Glide.with(itemView.context)
-                .load(item.imageUrl)
-                .placeholder(R.drawable.sparkle_motion)
-                .into(binding.ivProductImage)
+            bindProductImage(itemView.context, item.imageUrl, binding.ivProductImage)
 
             itemView.setOnClickListener { onItemClick(item) }
         }

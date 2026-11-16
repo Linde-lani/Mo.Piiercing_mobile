@@ -1,5 +1,6 @@
 package com.example.moes
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,28 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+
+/**
+ * Utility helper to bind product images from HTTP URLs or local drawable resources.
+ */
+fun bindProductImage(context: Context, imageUrl: String, imageView: ImageView) {
+    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
+        Glide.with(context)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_jewelry_24)
+            .error(R.drawable.ic_jewelry_24)
+            .into(imageView)
+    } else if (imageUrl.isNotEmpty()) {
+        val resId = context.resources.getIdentifier(imageUrl, "drawable", context.packageName)
+        if (resId != 0) {
+            imageView.setImageResource(resId)
+        } else {
+            imageView.setImageResource(R.drawable.ic_jewelry_24)
+        }
+    } else {
+        imageView.setImageResource(R.drawable.ic_jewelry_24)
+    }
+}
 
 // TattooAdapter for gallery and admin management
 class TattooAdapter(
@@ -51,10 +74,7 @@ class TattooAdapter(
             tvCategory.text = product.category
             tvPrice.text = "R${String.format("%.2f", product.price)}"
 
-            Glide.with(itemView.context)
-                .load(product.imageUrl)
-                .placeholder(R.drawable.sparkle_motion)
-                .into(ivImage)
+            bindProductImage(itemView.context, product.imageUrl, ivImage)
 
             itemView.setOnClickListener {
                 onProductClick?.invoke(product)
@@ -105,10 +125,7 @@ class JewelleryAdapter(
             tvCategory.text = product.category
             tvPrice.text = "R${String.format("%.2f", product.price)}"
 
-            Glide.with(itemView.context)
-                .load(product.imageUrl)
-                .placeholder(R.drawable.sparkle_motion)
-                .into(ivImage)
+            bindProductImage(itemView.context, product.imageUrl, ivImage)
 
             itemView.setOnClickListener {
                 onProductClick?.invoke(product)
@@ -156,10 +173,7 @@ class GalleryAdapter(
             tvCategory.text = product.category
             tvPrice.text = "R${String.format("%.2f", product.price)}"
 
-            Glide.with(itemView.context)
-                .load(product.imageUrl)
-                .placeholder(R.drawable.sparkle_motion)
-                .into(ivImage)
+            bindProductImage(itemView.context, product.imageUrl, ivImage)
 
             itemView.setOnClickListener {
                 onProductClick?.invoke(product)
@@ -200,8 +214,8 @@ class BookingAdapter(
         private val tvStatusBadge: TextView = itemView.findViewById(R.id.tvStatusBadge)
 
         fun bind(booking: Booking) {
-            tvCustomerName.text = booking.customerName
-            tvServiceName.text = "${booking.serviceName} • ${booking.bookingTime}"
+            tvCustomerName.text = booking.customerName.ifEmpty { "Customer" }
+            tvServiceName.text = "${booking.serviceName.ifEmpty { "Piercing Service" }} • ${booking.bookingTime}"
             tvStatusBadge.text = booking.status
 
             itemView.setOnClickListener {

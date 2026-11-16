@@ -1,13 +1,17 @@
-package com.example.moes // Ensure this matches your actual package name
+package com.example.moes
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,48 +29,114 @@ class ProfileScreen : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         setupUserProfile()
+        setupActionButtons()
         setupBottomNavigation()
+        loadUserStats()
         loadUpcomingAppointments()
 
         findViewById<View>(R.id.btnEditProfile).setOnClickListener {
-            // Logic to open Edit Profile activity
-            Toast.makeText(this, "Edit Profile Clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Profile settings updated", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun setupUserProfile() {
         val user = auth.currentUser
         if (user != null) {
-            findViewById<TextView>(R.id.tvProfileName).text = user.displayName ?: "User Name"
-            findViewById<TextView>(R.id.tvProfileEmail).text = user.email ?: "email@example.com"
+            val name = user.displayName ?: user.email?.substringBefore("@") ?: "Studio Customer"
+            findViewById<TextView>(R.id.tvProfileName).text = name
+            findViewById<TextView>(R.id.tvProfileEmail).text = user.email ?: "email@mopiercings.com"
         }
     }
 
+    private fun setupActionButtons() {
+        findViewById<Button>(R.id.btnActionBookings).setOnClickListener {
+            startActivity(Intent(this, my_bookings::class.java))
+        }
+
+        findViewById<Button>(R.id.btnActionWishlist).setOnClickListener {
+            startActivity(Intent(this, WishlistActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.btnActionCart).setOnClickListener {
+            startActivity(Intent(this, cart::class.java))
+        }
+
+        findViewById<TextView>(R.id.tvViewAllAppointments).setOnClickListener {
+            startActivity(Intent(this, my_bookings::class.java))
+        }
+    }
+
+    private fun loadUserStats() {
+        val user = auth.currentUser ?: return
+        val userEmail = user.email ?: ""
+        val userId = user.uid
+
+        val tvBookings = findViewById<TextView>(R.id.tvStatBookingsCount)
+        val tvCart = findViewById<TextView>(R.id.tvStatCartCount)
+        val tvWishlist = findViewById<TextView>(R.id.tvStatWishlistCount)
+
+        // Bookings count
+        db.collection("bookings")
+            .whereEqualTo("customerEmail", userEmail)
+            .get()
+            .addOnSuccessListener { docs ->
+                tvBookings.text = docs.size().toString()
+            }
+
+        // Cart items count
+        db.collection("users").document(userId).collection("cart")
+            .get()
+            .addOnSuccessListener { docs ->
+                tvCart.text = docs.size().toString()
+            }
+
+        // Wishlist items count
+        db.collection("users").document(userId).collection("wishlist")
+            .get()
+            .addOnSuccessListener { docs ->
+                tvWishlist.text = docs.size().toString()
+            }
+    }
+
     private fun loadUpcomingAppointments() {
-        val userId = auth.currentUser?.uid ?: return
+        val user = auth.currentUser ?: return
+        val userEmail = user.email ?: ""
+        val userId = user.uid
         val container = findViewById<LinearLayout>(R.id.appointmentContainer)
 
-        // Fetch bookings for the current user
         db.collection("bookings")
-            .whereEqualTo("userId", userId)
-            .limit(10)
             .get()
             .addOnSuccessListener { documents ->
-                container.removeAllViews() // Clear the "Loading..." state
+                container.removeAllViews()
 
-                if (documents.isEmpty) {
+                val userBookings = documents.mapNotNull { doc ->
+                    val booking = doc.toObject(Booking::class.java)
+                    booking.bookingId = doc.id
+                    val bEmail = doc.getString("customerEmail") ?: doc.getString("email") ?: ""
+                    val bUid = doc.getString("userId") ?: ""
+
+                    if (bEmail.equals(userEmail, ignoreCase = true) || bUid == userId) {
+                        booking
+                    } else {
+                        null
+                    }
+                }.sortedByDescending { it.bookingDate }
+
+                if (userBookings.isEmpty()) {
                     val noData = TextView(this).apply {
-                        text = "No upcoming appointments."
+                        text = "No appointments booked yet."
+                        setTextColor(Color.parseColor("#B0B0B0"))
                         setPadding(0, 20, 0, 20)
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
                     }
                     container.addView(noData)
                     return@addOnSuccessListener
                 }
 
-                for (document in documents) {
-                    val date = document.getString("date") ?: ""
-                    val service = document.getString("service") ?: ""
-                    val status = document.getString("status") ?: "Pending"
+                for (booking in userBookings.take(5)) {
+                    val date = booking.bookingDate.ifEmpty { "Pending" }
+                    val service = booking.serviceName.ifEmpty { "Piercing Session" }
+                    val status = booking.status.ifEmpty { "Pending" }
 
                     addAppointmentRow(container, date, service, status)
                 }
@@ -77,43 +147,42 @@ class ProfileScreen : AppCompatActivity() {
     }
 
     private fun addAppointmentRow(container: LinearLayout, date: String, service: String, status: String) {
-        // Create a horizontal row
         val row = LinearLayout(this).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             orientation = LinearLayout.HORIZONTAL
-            setPadding(0, 25, 0, 25)
+            setPadding(0, 20, 0, 20)
         }
 
-        // Date Column
         val tvDate = TextView(this).apply {
             text = date
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-            // Use setTextSize with TypedValue to explicitly define SP
-            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 12f)
+            setTextColor(Color.WHITE)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
         }
 
-// Piercing/Service Column
         val tvService = TextView(this).apply {
             text = service
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.5f)
-            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 12f)
-            setPadding(10, 0, 10, 0)
+            setTextColor(ContextCompat.getColor(this@ProfileScreen, R.color.moes_gold))
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+            setPadding(8, 0, 8, 0)
         }
 
-// Status Column with pill background
         val tvStatus = TextView(this).apply {
             text = status
             layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             gravity = Gravity.END
-            setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 11f)
-            setPadding(20, 8, 20, 8)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
 
-            // Modern way to get color (replaces deprecated method)
-            setTextColor(androidx.core.content.ContextCompat.getColor(this@ProfileScreen, android.R.color.black))
-
+            when (status.lowercase()) {
+                "confirmed" -> setTextColor(Color.parseColor("#4CAF50"))
+                "pending" -> setTextColor(Color.parseColor("#FB8C00"))
+                "cancelled" -> setTextColor(Color.parseColor("#E53935"))
+                else -> setTextColor(Color.WHITE)
+            }
         }
 
         row.addView(tvDate)
@@ -121,17 +190,16 @@ class ProfileScreen : AppCompatActivity() {
         row.addView(tvStatus)
         container.addView(row)
 
-        // Add a thin separator line
         val line = View(this).apply {
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2)
-            setBackgroundColor(android.graphics.Color.parseColor("#EEEEEE"))
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1)
+            setBackgroundColor(Color.parseColor("#2A2A2A"))
         }
         container.addView(line)
     }
 
     private fun setupBottomNavigation() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNav.selectedItemId = R.id.nav_profile // Highlight profile icon
+        bottomNav.selectedItemId = R.id.nav_profile
 
         bottomNav.setOnItemSelectedListener { item ->
             if (item.itemId == R.id.nav_profile) return@setOnItemSelectedListener true

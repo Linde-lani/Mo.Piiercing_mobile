@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="Product Image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/sparkle_motion" />
+                android:src="@drawable/ic_jewelry_24" />
 
             <TextView
                 android:id="@+id/tvBadge"

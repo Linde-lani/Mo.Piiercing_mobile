@@ -41,7 +41,7 @@
                         android:layout_centerVertical="true"
                         android:contentDescription="Admin Avatar"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/kadi_monroe"
+                        android:src="@drawable/ic_profile_placeholder"
                         app:shapeAppearanceOverlay="@style/CircleImage"
                         app:strokeColor="#D4AF37"
                         app:strokeWidth="1.5dp" />

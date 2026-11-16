@@ -5,17 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".MainActivity">
+    android:background="@color/dark_bg"
+    tools:context=".ProfileScreen">
 
     <!-- Header Navigation Bar -->
     <RelativeLayout
         android:id="@+id/navBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/white"
-        >
+        android:layout_height="64dp"
+        android:background="@color/dark_surface"
+        android:elevation="4dp"
+        android:paddingHorizontal="16dp">
 
         <TextView
             android:id="@+id/txtAppName"
@@ -23,65 +23,67 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:text="Profile"
-            android:textColor="@color/moes_forest_green"
-            android:textSize="22sp"
+            android:text="My Profile"
+            android:textColor="@color/moes_gold"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
 
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#22000000"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
 
-    <!-- Bottom Navigation Bar for 5 pages -->
+    <!-- Main Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNavigation"
         android:layout_below="@id/navBar"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="-2dp"
-        android:padding="12dp">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="12dp">
 
-            <!-- Card 1 & 2 Row -->
-            <LinearLayout
+            <!-- Profile Info Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <!-- Profile Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1.8"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="@color/accent_gold"
-                    app:strokeWidth="1dp" />
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="@color/dark_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/accent_gold"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="16dp">
 
-                    <!-- 1. Circular Profile Image -->
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivProfilePic"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_profile_placeholder"
                         app:shapeAppearanceOverlay="@style/CircleImage"
                         app:strokeColor="@color/accent_gold"
                         app:strokeWidth="2dp" />
 
-                    <!-- 2. Profile Details (Aligned Vertically) -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -93,85 +95,207 @@
                             android:id="@+id/tvProfileName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Loading..."
-                            android:textColor="@color/primary_black"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="Samantha Reed" />
 
                         <TextView
                             android:id="@+id/tvProfileEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="email@example.com"
-                            android:textColor="@color/text_dark"
-                            android:textSize="12sp" />
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/moes_gold"
+                            android:textSize="12sp"
+                            tools:text="samantha@example.com" />
                     </LinearLayout>
 
-                    <!-- 3. Edit Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEditProfile"
                         style="@style/Widget.Material3.Button.IconButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:backgroundTint="@color/moes_forest_green"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:backgroundTint="#1B5E20"
                         app:cornerRadius="12dp"
                         app:icon="@android:drawable/ic_menu_edit"
                         app:iconTint="@color/accent_gold" />
 
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <!-- Actions Card -->
+            <!-- Activity Quick Stats Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="@color/accent_gold"
+                    app:cardBackgroundColor="@color/dark_surface"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="#33D4AF37"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="8dp">
+                        android:padding="12dp">
 
-                        <Button
-                            style="@style/Widget.Material3.Button.TextButton"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvStatBookingsCount"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:backgroundTint="#FDF5E6"
-                            android:text="My Bookings"
-                            android:textColor="@color/primary_black" />
+                            android:textColor="@color/moes_gold"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="3" />
 
-                        <Button
-                            style="@style/Widget.Material3.Button.TextButton"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:backgroundTint="#FDF5E6"
-                            android:text="Saved Favourites"
-                            android:textColor="@color/primary_black" />
+                            android:layout_marginTop="2dp"
+                            android:text="Bookings"
+                            android:textColor="#B0B0B0"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                        <Button
-                            style="@style/Widget.Material3.Button.TextButton"
-                            android:layout_width="match_parent"
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/dark_surface"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="#33D4AF37"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvStatCartCount"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#FDF5E6"
-                            android:text="My Orders"
-                            android:textColor="@color/primary_black" />
+                            android:textColor="@color/moes_gold"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Cart Items"
+                            android:textColor="#B0B0B0"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/dark_surface"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="#33D4AF37"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvStatWishlistCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/moes_gold"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Wishlist"
+                            android:textColor="#B0B0B0"
+                            android:textSize="10sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Card 3: Upcoming Appointments Table -->
+            <!-- Actions Shortcuts Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
+                android:layout_margin="4dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/dark_surface"
+                app:cardCornerRadius="16dp"
+                app:strokeColor="@color/accent_gold"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/btnActionBookings"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="My Bookings"
+                        android:textColor="@color/moes_gold"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnActionWishlist"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Saved Wishlist"
+                        android:textColor="@color/moes_gold"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnActionCart"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="View Cart"
+                        android:textColor="@color/moes_gold"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Appointments Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/dark_surface"
                 app:cardCornerRadius="16dp"
                 app:strokeColor="@color/accent_gold"
                 app:strokeWidth="1dp">
@@ -180,27 +304,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="16dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="12dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Upcoming Appointments"
-                            android:textColor="@color/primary_black"
-                            android:textSize="18sp"
+                            android:text="My Appointments"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvViewAllAppointments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:text="VIEW ALL"
-                            android:textColor="@color/moes_forest_green"
+                            android:textColor="@color/moes_gold"
                             android:textSize="12sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -210,14 +335,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingVertical="8dp">
+                        android:paddingVertical="6dp">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="DATE"
-                            android:textColor="@color/moes_forest_green"
+                            android:textColor="@color/moes_gold"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -225,8 +350,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
-                            android:text="PIERCING"
-                            android:textColor="@color/moes_forest_green"
+                            android:text="SERVICE"
+                            android:textColor="@color/moes_gold"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -236,7 +361,7 @@
                             android:layout_weight="1"
                             android:gravity="end"
                             android:text="STATUS"
-                            android:textColor="@color/moes_forest_green"
+                            android:textColor="@color/moes_gold"
                             android:textSize="10sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -244,7 +369,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#EEEEEE" />
+                        android:background="#2A2A2A" />
 
                     <!-- Container for dynamic rows -->
                     <LinearLayout
@@ -256,63 +381,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-
-            <!-- Actions Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="372dp"
-                android:layout_height="180dp"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="@color/accent_gold"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <Button
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:backgroundTint="#FDF5E6"
-                        android:text="My Bookings"
-                        android:textColor="@color/primary_black" />
-
-                    <Button
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:backgroundTint="#FDF5E6"
-                        android:text="Saved Favourites"
-                        android:textColor="@color/primary_black" />
-
-                    <Button
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#FDF5E6"
-                        android:text="My Orders"
-                        android:textColor="@color/primary_black" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#22000000"
-        app:itemIconTint="@color/moes_forest_green"
-        app:itemTextColor="@color/moes_forest_green"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

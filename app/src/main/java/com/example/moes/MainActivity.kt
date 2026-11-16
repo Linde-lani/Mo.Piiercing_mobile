@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var newArrivalsAdapter: FeaturedTattooAdapter
     private lateinit var bestSellersAdapter: FeaturedJewelleryAdapter
     private lateinit var quickActionsAdapter: HomeQuickActionsAdapter
-    private lateinit var servicesAdapter: ServiceHighlightAdapter
     private lateinit var reviewsAdapter: ReviewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         setupNavigation(R.id.nav_home)
 
         // Load Data from Firebase Firestore
-        loadDashboardData(currentUser.email ?: "")
+        loadDashboardData(currentUser.email ?: "", currentUser.uid)
     }
 
     private fun verifyUserRoleAndFetchProfile(userId: String, email: String) {
@@ -83,11 +82,11 @@ class MainActivity : AppCompatActivity() {
                     val name = document.getString("username")
                         ?: document.getString("name")
                         ?: email.substringBefore("@")
-                    binding.tvWelcomeGreeting.text = "Welcome Back, $name 👋"
+                    binding.tvWelcomeGreeting.text = "Welcome Back, $name "
                 }
             }
             .addOnFailureListener {
-                binding.tvWelcomeGreeting.text = "Welcome Back 👋"
+                binding.tvWelcomeGreeting.text = "Welcome Back "
             }
     }
 
@@ -137,17 +136,6 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvBestSellers.adapter = bestSellersAdapter
 
-        // Studio Services Adapter
-        servicesAdapter = ServiceHighlightAdapter { service ->
-            val intent = Intent(this, BookingScreen::class.java)
-            intent.putExtra("SERVICE_NAME", service.title)
-            startActivity(intent)
-        }
-        binding.rvServices.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvServices.adapter = servicesAdapter
-        servicesAdapter.submitList(getStudioServicesList())
-
         // Customer Reviews Adapter
         reviewsAdapter = ReviewsAdapter()
         binding.rvCustomerReviews.layoutManager =
@@ -193,7 +181,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadDashboardData(userEmail: String) {
+    private fun loadDashboardData(userEmail: String, userId: String) {
         // Fetch Products from Firestore
         db.collection("products")
             .whereEqualTo("active", true)
@@ -205,28 +193,21 @@ class MainActivity : AppCompatActivity() {
                     product
                 }
 
-                // Filter Featured Tattoos
                 val featuredTattoos = allProducts.filter {
                     it.featured && it.category.equals("Tattoo", ignoreCase = true)
                 }
                 featuredTattooAdapter.submitList(if (featuredTattoos.isNotEmpty()) featuredTattoos else allProducts.take(4))
 
-                // Filter Featured Jewellery
                 val featuredJewellery = allProducts.filter {
                     it.featured && it.category.equals("Jewellery", ignoreCase = true)
                 }
                 featuredJewelleryAdapter.submitList(if (featuredJewellery.isNotEmpty()) featuredJewellery else allProducts.take(4))
 
-                // Filter New Arrivals
                 val newArrivals = allProducts.filter { it.isNew }
                 newArrivalsAdapter.submitList(if (newArrivals.isNotEmpty()) newArrivals else allProducts.take(4))
 
-                // Filter Best Sellers
                 val bestSellers = allProducts.filter { it.bestSeller }
                 bestSellersAdapter.submitList(if (bestSellers.isNotEmpty()) bestSellers else allProducts.take(4))
-            }
-            .addOnFailureListener {
-                // Keep default empty states
             }
 
         // Fetch Upcoming Bookings for User
@@ -256,20 +237,16 @@ class MainActivity : AppCompatActivity() {
                     binding.layoutNoBookings.visibility = View.VISIBLE
                 }
             }
-            .addOnFailureListener {
-                binding.cardUpcomingBooking.visibility = View.GONE
-                binding.layoutNoBookings.visibility = View.VISIBLE
-            }
 
-        // Fetch Cart Summary & Count
-        db.collection("cart")
-            .whereEqualTo("userEmail", userEmail)
-            .get()
-            .addOnSuccessListener { documents ->
-                val count = documents.size()
+        // Listen to Real-Time Cart Updates
+        db.collection("users").document(userId).collection("cart")
+            .addSnapshotListener { snapshots, _ ->
+                val count = snapshots?.size() ?: 0
                 var totalPrice = 0.0
-                for (doc in documents) {
-                    totalPrice += (doc.getDouble("price") ?: 0.0) * (doc.getLong("quantity") ?: 1L).toDouble()
+                if (snapshots != null) {
+                    for (doc in snapshots) {
+                        totalPrice += (doc.getDouble("price") ?: 0.0) * (doc.getLong("quantity") ?: 1L).toDouble()
+                    }
                 }
 
                 if (count > 0) {
@@ -321,21 +298,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addProductToCart(product: Product) {
-        val userEmail = auth.currentUser?.email ?: return
+        val userId = auth.currentUser?.uid ?: return
         val cartItem = hashMapOf(
-            "userEmail" to userEmail,
             "productId" to product.productId,
-            "productName" to product.name,
+            "name" to product.name,
             "price" to product.price,
             "imageUrl" to product.imageUrl,
             "quantity" to 1,
             "timestamp" to System.currentTimeMillis()
         )
 
-        db.collection("cart").add(cartItem)
+        db.collection("users").document(userId).collection("cart").add(cartItem)
             .addOnSuccessListener {
                 Toast.makeText(this, "${product.name} added to cart!", Toast.LENGTH_SHORT).show()
-                loadDashboardData(userEmail)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Failed to add: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -349,17 +324,6 @@ class MainActivity : AppCompatActivity() {
             QuickAction("View Cart", R.drawable.ic_jewelry_24, "CART"),
             QuickAction("My Bookings", R.drawable.ic_calendar_24, "MY_BOOKINGS"),
             QuickAction("My Profile", R.drawable.ic_profile, "PROFILE")
-        )
-    }
-
-    private fun getStudioServicesList(): List<ServiceHighlight> {
-        return listOf(
-            ServiceHighlight("1", "Small Custom Tattoo", "Fine line, minimalist, and small symbol tattoos.", "From R450", R.drawable.tatto_1),
-            ServiceHighlight("2", "Large Custom Tattoo", "Full sleeve, back piece, & detailed custom art.", "From R1,200", R.drawable.tatto_5),
-            ServiceHighlight("3", "Ear Piercings", "Lobe, helix, tragus, & industrial styling.", "From R250", R.drawable.ear_1),
-            ServiceHighlight("4", "Nose Piercings", "Nostril and septum piercing with titanium jewelry.", "From R300", R.drawable.nose_1),
-            ServiceHighlight("5", "Industrial Piercings", "Double ear cartilage piercing with barbell.", "From R350", R.drawable.ear_2),
-            ServiceHighlight("6", "Belly Piercings", "Navel piercing with premium gold & titanium studs.", "From R350", R.drawable.belly_1)
         )
     }
 

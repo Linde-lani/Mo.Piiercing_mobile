@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -59,15 +58,7 @@ class FeaturedJewelleryAdapter(
                 tvBadge.visibility = View.GONE
             }
 
-            if (product.imageUrl.isNotEmpty()) {
-                Glide.with(itemView.context)
-                    .load(product.imageUrl)
-                    .placeholder(R.drawable.sparkle_motion)
-                    .error(R.drawable.sparkle_motion)
-                    .into(ivImage)
-            } else {
-                ivImage.setImageResource(R.drawable.sparkle_motion)
-            }
+            bindProductImage(itemView.context, product.imageUrl, ivImage)
 
             btnBook.setOnClickListener { onBookClick(product) }
             btnAddToCart.setOnClickListener { onAddToCartClick(product) }
