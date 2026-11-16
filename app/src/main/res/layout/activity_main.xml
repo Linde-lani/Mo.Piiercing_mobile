@@ -5,374 +5,832 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_light"
+    android:background="#121212"
     tools:context=".MainActivity">
 
-    <!-- Header Navigation Bar -->
+    <!-- Header Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/navBar"
-        android:background="@color/glass_white">
+        android:background="#1A1A1A">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="64dp"
+            android:paddingHorizontal="16dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:title="Mo Piiercings &amp; Co"
-                app:titleTextColor="@color/moes_forest_green" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivUserProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="Customer Profile"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_profile"
+                app:shapeAppearanceOverlay="@style/Widget.Material3.CircularProgressIndicator" />
 
-            <ImageButton
-                android:id="@+id/btnCart"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/ivUserProfile"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mo Piiercings &amp; Co"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tattoo &amp; Body Piercing Studio"
+                    android:textColor="#B0B0B0"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Cart"
-                android:src="@android:drawable/ic_menu_view"
-                app:tint="@color/moes_forest_green" />
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnNotifications"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Notifications"
+                    android:src="@drawable/ic_bell_24"
+                    app:tint="#D4AF37" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp">
+
+                    <ImageButton
+                        android:id="@+id/btnCart"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Cart"
+                        android:src="@drawable/ic_jewelry_24"
+                        app:tint="#D4AF37" />
+
+                    <TextView
+                        android:id="@+id/tvCartBadge"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="top|end"
+                        android:background="@drawable/bg_badge_low_stock"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </FrameLayout>
+            </LinearLayout>
 
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Main Scrollable Body Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_above="@id/bottomNavigation"
+        android:layout_below="@id/appBarHeader"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="0dp">
+            android:paddingBottom="24dp">
+
+            <!-- Welcome Greeting Banner -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:id="@+id/tvWelcomeGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome Back 👋"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Ready for your next masterpiece?"
+                    android:textColor="#B0B0B0"
+                    android:textSize="13sp" />
+            </LinearLayout>
 
             <!-- HERO SECTION -->
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="64dp">
+                android:layout_height="220dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:strokeColor="#33D4AF37"
+                app:strokeWidth="1dp">
 
-                <!-- Background Image (Cinematic Studio Close-up) -->
-                <ImageView
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/luxury_studio_bg1"
-                    android:contentDescription="Hero Background" />
+                    android:layout_height="match_parent">
 
-                <!-- Glassmorphism Card Overlay -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Hero Background"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/luxury_studio_bg1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#A6000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="serif"
+                            android:text="Express Yourself"
+                            android:textColor="#D4AF37"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.08"
+                            android:text="Where Art Meets Identity"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnHeroBook"
+                                android:layout_width="0dp"
+                                android:layout_height="44dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:backgroundTint="#1B5E20"
+                                android:text="Book Appointment"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:cornerRadius="10dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnHeroGallery"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="0dp"
+                                android:layout_height="44dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:text="Browse Gallery"
+                                android:textColor="#D4AF37"
+                                android:textSize="12sp"
+                                app:cornerRadius="10dp"
+                                app:strokeColor="#D4AF37" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- BUSINESS STATISTICS CARDS -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Stat 1 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="150dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#1E1E1E"
+                        app:cardCornerRadius="12dp"
+                        app:strokeColor="#33D4AF37"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⭐"
+                                android:textSize="20sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="4.9 Rating"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Top Reviewed"
+                                    android:textColor="#B0B0B0"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Stat 2 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#1E1E1E"
+                        app:cardCornerRadius="12dp"
+                        app:strokeColor="#33D4AF37"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🎨"
+                                android:textSize="20sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100+ Tattoos"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Custom Designs"
+                                    android:textColor="#B0B0B0"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Stat 3 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="160dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardBackgroundColor="#1E1E1E"
+                        app:cardCornerRadius="12dp"
+                        app:strokeColor="#33D4AF37"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="💎"
+                                android:textSize="20sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="50+ Jewellery"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Titanium &amp; Gold"
+                                    android:textColor="#B0B0B0"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Stat 4 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="170dp"
+                        android:layout_height="70dp"
+                        app:cardBackgroundColor="#1E1E1E"
+                        app:cardCornerRadius="12dp"
+                        app:strokeColor="#33D4AF37"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📅"
+                                android:textSize="20sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Same-Day Bookings"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available Daily"
+                                    android:textColor="#B0B0B0"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- UPCOMING BOOKINGS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming Appointments"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Active Appointment Card -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardUpcomingBooking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="24dp"
-                    app:cardBackgroundColor="@color/glass_white"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/moes_forest_green">
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="#1E1E1E"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="#1B5E20"
+                    app:strokeWidth="1.5dp"
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="24dp"
-                        android:gravity="center">
+                        android:padding="16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvUpcomingService"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#FFFFFF"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Custom Ear Piercing" />
+
+                            <TextView
+                                android:id="@+id/tvUpcomingStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:background="@drawable/bg_badge_pending"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                tools:text="Confirmed" />
+                        </RelativeLayout>
 
                         <TextView
+                            android:id="@+id/tvUpcomingDateTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Express Yourself"
-                            android:textColor="@color/moes_forest_green"
-                            android:textSize="32sp"
-                            android:textStyle="bold"
-                            android:fontFamily="serif" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Where Art Meets Identity"
-                            android:textColor="@color/moes_forest_green"
-                            android:textSize="16sp"
-                            android:letterSpacing="0.1" />
+                            android:layout_marginTop="8dp"
+                            android:textColor="#D4AF37"
+                            android:textSize="13sp"
+                            tools:text="📅 Date: 2025-05-20 | ⏰ Time: 14:00" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnHeroBook"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="20dp"
-                            android:text="Book Appointment"
-                            android:textColor="@color/glass_white"
-                            android:textStyle="bold"
-                            app:backgroundTint="@color/moes_forest_green"
-                            app:cornerRadius="12dp" />
-
-
+                            android:id="@+id/btnViewBookings"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="12dp"
+                            android:text="View My Bookings"
+                            android:textColor="#D4AF37"
+                            android:textSize="11sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="#D4AF37" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-            </FrameLayout>
 
-
-            <!-- TODAY'S PICKS SECTION -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-
-                    android:text="Today's Picks"
-                    android:textColor="@color/moes_forest_green"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <HorizontalScrollView
+                <!-- Empty State for No Bookings -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/layoutNoBookings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none">
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#2A2A2A"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No upcoming appointments scheduled."
+                            android:textColor="#B0B0B0"
+                            android:textSize="13sp" />
 
-                        <!-- Luxury Product Card Template -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="160dp"
-                            android:layout_height="220dp"
-                            android:layout_marginEnd="16dp"
-                            app:cardBackgroundColor="@color/moes_forest_green"
-                            app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/accent_gold"
-                            app:strokeWidth="1dp">
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="160dp"
-                            android:layout_height="220dp"
-                            android:layout_marginEnd="16dp"
-                            app:cardBackgroundColor="@color/moes_forest_green"
-                            app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/accent_gold"
-                            app:strokeWidth="1dp">
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="160dp"
-                            android:layout_height="220dp"
-                            android:layout_marginEnd="16dp"
-                            app:cardBackgroundColor="@color/moes_forest_green"
-                            app:cardCornerRadius="16dp"
-                            app:strokeColor="@color/accent_gold"
-                            app:strokeWidth="1dp">
-                        </com.google.android.material.card.MaterialCardView>
-
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnNoBookingAction"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="10dp"
+                            android:backgroundTint="#1B5E20"
+                            android:text="Book Appointment Now"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            app:cornerRadius="8dp" />
                     </LinearLayout>
-                </HorizontalScrollView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.core.widget.NestedScrollView
-                    android:id="@+id/dashboardScrollView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fillViewport="true">
-
-                </androidx.core.widget.NestedScrollView>
             </LinearLayout>
 
+            <!-- QUICK ACTIONS SECTION -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/cardview_default_elevation"
-                android:layout_marginBottom="100dp"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-
-                <!-- Products Section Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginStart="@dimen/cardview_default_elevation"
-                    android:text="Today's Pick's"
-                    android:textColor="@color/moes_forest_green"
-                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
+                    android:text="Quick Shortcuts"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Horizontal View for Product Images -->
-                <HorizontalScrollView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvQuickActions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:scrollbars="none">
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/layoutProductCards"
+            <!-- FEATURED TATTOOS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Featured Tattoos"
+                        android:textColor="#D4AF37"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvSeeAllTattoos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="See All ›"
+                        android:textColor="#B0B0B0"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
-                        <!-- Product Card 1 -->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="150dp"
-                            android:layout_height="180dp"
-                            android:layout_marginEnd="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFeaturedTattoos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/moes_forest_green"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                android:padding="8dp">
+            <!-- FEATURED JEWELLERY SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="110dp"
-                                    android:contentDescription="jewelry_1"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/jewelry_1" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="Signature Dish"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Featured Jewellery"
+                        android:textColor="#D4AF37"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                        <!-- Product Card 2 -->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="150dp"
-                            android:layout_height="180dp"
-                            android:layout_marginEnd="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
+                    <TextView
+                        android:id="@+id/tvSeeAllJewellery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="See All ›"
+                        android:textColor="#B0B0B0"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/moes_forest_green"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                android:padding="8dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFeaturedJewellery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="110dp"
-                                    android:contentDescription="Product 2"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/jewelry_2"/>
+            <!-- NEW ARRIVALS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="Special Combo"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="New Arrivals"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                        <!-- Product Card 3 -->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="150dp"
-                            android:layout_height="180dp"
-                            android:layout_marginEnd="12dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvNewArrivals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/moes_forest_green"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                android:padding="8dp">
+            <!-- BEST SELLERS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="110dp"
-                                    android:contentDescription="Product 3"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/ear_1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Best Sellers"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="Refreshing Drink"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBestSellers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                        <!-- Product Card 4 -->
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="150dp"
-                            android:layout_height="180dp"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="4dp">
+            <!-- SERVICE HIGHLIGHTS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/moes_forest_green"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical"
-                                android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Studio Services"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="110dp"
-                                    android:contentDescription="Product 4"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/ear_2" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvServices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
+            </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:text="Dessert Treat"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+            <!-- SHOPPING CART SUMMARY CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#33D4AF37"
+                app:strokeWidth="1dp">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shopping Cart"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvCartSummaryDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="#B0B0B0"
+                            android:textSize="12sp"
+                            tools:text="0 items | Total: R0.00" />
                     </LinearLayout>
-                </HorizontalScrollView>
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnViewCartSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:backgroundTint="#1B5E20"
+                        android:text="View Cart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        app:cornerRadius="8dp" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CUSTOMER REVIEWS SECTION -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Client Reviews"
+                    android:textColor="#D4AF37"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCustomerReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp" />
             </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation Bar for 5 pages -->
+    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
-        android:background="#22000000"
+        android:background="#1A1A1A"
         app:itemIconTint="@color/moes_forest_green"
         app:itemTextColor="@color/moes_forest_green"
         app:labelVisibilityMode="labeled"

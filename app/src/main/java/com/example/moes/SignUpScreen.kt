@@ -162,9 +162,11 @@ class SignUpScreen : AppCompatActivity() {
     fun saveUserToFirestore(userId: String, name: String, email: String, isGoogleSignIn: Boolean) {
         val userMap = hashMapOf(
             "username" to name,
+            "fullName" to name,
             "email" to email,
             "userId" to userId,
-            "role" to "user",
+            "role" to "CUSTOMER",
+            "profileImage" to "",
             "createdAt" to System.currentTimeMillis()
         )
 

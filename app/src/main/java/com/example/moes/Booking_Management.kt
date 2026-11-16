@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moes.databinding.ActivityBookingManagementBinding
 import com.example.moes.databinding.DialogBookingDetailsBinding
+import java.io.File
 
 /**
  * Booking_Management Activity handles appointment management for the Mo Piercings Admin Portal.
@@ -416,4 +417,8 @@ class Booking_Management : AppCompatActivity() {
 
         dialog.show()
     }
+}
+
+private fun Dialog.setContentView(root: File) {
+    TODO("Not yet implemented")
 }
