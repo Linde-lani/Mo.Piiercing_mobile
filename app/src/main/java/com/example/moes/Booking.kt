@@ -13,5 +13,14 @@ data class Booking(
     var bookingTime: String = "",
     var bookingNotes: String = "",
     var status: String = "Pending",
-    var timestamp: Long = System.currentTimeMillis()
-) : Serializable
+    var timestamp: Any? = System.currentTimeMillis()
+) : Serializable {
+    val timestampLong: Long
+        get() = when (timestamp) {
+            is Long -> timestamp as Long
+            is com.google.firebase.Timestamp -> (timestamp as com.google.firebase.Timestamp).toDate().time
+            is java.util.Date -> (timestamp as java.util.Date).time
+            is Number -> (timestamp as Number).toLong()
+            else -> System.currentTimeMillis()
+        }
+}
