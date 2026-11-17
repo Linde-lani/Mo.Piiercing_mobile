@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardBooking"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="6dp"
+    app:cardBackgroundColor="@color/dark_card_bg"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/dark_card_stroke"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Row: Booking ID and Status Badge -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvBookingId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/moes_gold"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="#BK-1001" />
+
+            <TextView
+                android:id="@+id/tvStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_badge_pending"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/status_text_color"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="PENDING" />
+
+        </RelativeLayout>
+
+        <!-- Customer Name -->
+        <TextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="Samantha Reed" />
+
+        <!-- Appointment Date & Time -->
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="13sp"
+            tools:text="Oct 26, 2023 • 02:30 PM" />
+
+        <!-- Divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#22FFFFFF" />
+
+        <!-- Service Name -->
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Service: Septum Piercing &amp; Titanium Ring" />
+
+        <!-- Contact Info: Email & Phone -->
+        <TextView
+            android:id="@+id/tvCustomerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="6dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="13sp"
+            app:drawableStartCompat="@android:drawable/ic_dialog_email"
+            app:drawableTint="@color/dark_text_secondary"
+            tools:text="samantha.reed@example.com" />
+
+        <TextView
+            android:id="@+id/tvCustomerPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:drawablePadding="6dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="13sp"
+            app:drawableStartCompat="@android:drawable/ic_menu_call"
+            app:drawableTint="@color/dark_text_secondary"
+            tools:text="+1 (555) 234-5678" />
+
+        <!-- Divider line before actions -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="#22FFFFFF" />
+
+        <!-- Dynamic Action Buttons Row -->
+        <LinearLayout
+            android:id="@+id/layoutActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Confirm Button (For Pending status) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirm"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:backgroundTint="@color/status_confirmed_bg"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="Confirm"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <!-- Decline Button (For Pending status) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDecline"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="Decline"
+                android:textColor="@color/status_declined_bg"
+                android:textSize="12sp"
+                app:strokeColor="@color/status_declined_bg" />
+
+            <!-- Cancel Booking Button (For Confirmed status) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelBooking"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="Cancel Booking"
+                android:textColor="@color/status_cancelled_bg"
+                android:textSize="12sp"
+                app:strokeColor="@color/status_cancelled_bg" />
+
+            <!-- View Details Button (For Declined/Cancelled/Any status) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewDetails"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="View Details"
+                android:textColor="@color/moes_gold"
+                android:textSize="12sp"
+                app:strokeColor="@color/moes_gold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

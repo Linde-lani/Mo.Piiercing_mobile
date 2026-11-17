@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/dark_surface"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    app:strokeColor="@color/moes_gold"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Header: Booking ID & Status Badge -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dialogBookingId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/dialogStatusBadge"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/moes_gold"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Booking ID: #BK-1001" />
+
+            <TextView
+                android:id="@+id/dialogStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_badge_pending"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/status_text_color"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="PENDING" />
+
+        </RelativeLayout>
+
+        <!-- Customer Name -->
+        <TextView
+            android:id="@+id/dialogCustomerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Samantha Reed" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#33FFFFFF" />
+
+        <!-- Service Name -->
+        <TextView
+            android:id="@+id/dialogServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Service: Septum Piercing &amp; Titanium Ring" />
+
+        <!-- Appointment Date -->
+        <TextView
+            android:id="@+id/dialogAppointmentDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="14sp"
+            tools:text="Date: Oct 26, 2023" />
+
+        <!-- Appointment Time -->
+        <TextView
+            android:id="@+id/dialogAppointmentTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="14sp"
+            tools:text="Time: 02:30 PM" />
+
+        <!-- Email Address -->
+        <TextView
+            android:id="@+id/dialogEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:drawablePadding="8dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="14sp"
+            app:drawableStartCompat="@android:drawable/ic_dialog_email"
+            app:drawableTint="@color/moes_gold"
+            tools:text="samantha.reed@example.com" />
+
+        <!-- Phone Number -->
+        <TextView
+            android:id="@+id/dialogPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="8dp"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="14sp"
+            app:drawableStartCompat="@android:drawable/ic_menu_call"
+            app:drawableTint="@color/moes_gold"
+            tools:text="+1 (555) 234-5678" />
+
+        <!-- Booking Notes Header & Text -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Booking Notes:"
+            android:textColor="@color/moes_gold"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="16dp"
+            android:maxHeight="150dp">
+
+            <TextView
+                android:id="@+id/dialogBookingNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1A000000"
+                android:padding="10dp"
+                android:textColor="@color/dark_text_primary"
+                android:textSize="13sp"
+                tools:text="First time getting a septum piercing. Prefer gold anodized titanium jewelry if available." />
+
+        </ScrollView>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="14dp"
+            android:background="#33FFFFFF" />
+
+        <!-- Dialog Buttons Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogConfirm"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:backgroundTint="@color/status_confirmed_bg"
+                android:text="Confirm"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogDecline"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="Decline"
+                android:textColor="@color/status_declined_bg"
+                android:textSize="12sp"
+                app:strokeColor="@color/status_declined_bg" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogCancel"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="Cancel"
+                android:textColor="@color/status_cancelled_bg"
+                android:textSize="12sp"
+                app:strokeColor="@color/status_cancelled_bg" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogClose"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                android:textColor="@color/dark_text_secondary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
