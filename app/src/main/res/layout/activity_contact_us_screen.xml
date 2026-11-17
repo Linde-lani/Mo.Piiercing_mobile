@@ -5,67 +5,251 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#121212"
     tools:context=".ContactUsScreen">
 
-    <RelativeLayout
-        android:id="@+id/navBar"
+    <!-- Top Header -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/moes_forest_green">
+        android:background="#1A1A1A">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact Us"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:paddingHorizontal="16dp">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#22000000"
-        app:itemIconTint="@color/moes_forest_green"
-        app:itemTextColor="@color/moes_forest_green"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Contact Us"
+                android:textColor="#D4AF37"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/navBar"
         android:layout_above="@id/bottomNavigation"
+        android:layout_below="@id/appBarHeader"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
+            <!-- Contact Info Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#33D4AF37"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mo Piercings &amp; Co Studio"
+                        android:textColor="#D4AF37"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="📍 123 Luxury Studio Way, Sandton, Johannesburg\n📞 Phone: +27 11 987 6543\n✉️ Email: support@mopiercings.co.za\n⏰ Hours: Tue - Sat (09:00 - 18:00)"
+                        android:textColor="#CCCCCC"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOpenWebsite"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Visit Mo's Official Website 🌐"
+                        android:textColor="#D4AF37"
+                        android:textSize="12sp"
+                        app:cornerRadius="10dp"
+                        app:strokeColor="#D4AF37" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Social Media Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#1877F2"
+                    android:padding="0dp"
+                    android:text="Facebook"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    app:cornerRadius="10dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnInstagram"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E4405F"
+                    android:padding="0dp"
+                    android:text="Instagram"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    app:cornerRadius="10dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTiktok"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#000000"
+                    android:padding="0dp"
+                    android:text="TikTok"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    app:cornerRadius="10dp"
+                    app:strokeColor="#FFFFFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+
+            <!-- Contact Enquiry Form -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Get in Touch"
-                android:textColor="@color/moes_forest_green"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginTop="24dp"
+                android:text="Send Us a Message"
+                android:textColor="#D4AF37"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:lineSpacingExtra="6dp"
-                android:text="Phone: +1 (555) 123-4567\nEmail: support@moes.com\nAddress: 123 Main Street, Cityville"
-                android:textColor="@color/moes_forest_green"
-                android:textSize="16sp" />
+                android:layout_marginTop="12dp"
+                android:hint="Full Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Email Address">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Phone Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Subject">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Message">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmitContact"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#1B5E20"
+                android:text="Submit Message"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#1A1A1A"
+        app:itemIconTint="@color/moes_forest_green"
+        app:itemTextColor="@color/moes_forest_green"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
 </RelativeLayout>

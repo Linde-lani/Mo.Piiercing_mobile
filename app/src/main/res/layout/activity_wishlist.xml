@@ -1,108 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_bg"
+    android:background="@color/white"
     tools:context=".WishlistActivity">
 
-    <LinearLayout
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/moes_forest_green">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="My Wishlist"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Wishlist RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWishlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@id/navBar"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/product_preview_item" />
 
-        <!-- Top Header -->
-        <RelativeLayout
-            android:id="@+id/headerLayout"
-            android:layout_width="match_parent"
+    <!-- Empty State Layout -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyWishlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/navBar"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_heart_outline"
+            app:tint="@color/moes_forest_green"
+            android:contentDescription="Empty Wishlist" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/dark_surface"
-            android:elevation="6dp"
-            android:padding="16dp">
+            android:layout_marginTop="16dp"
+            android:text="Your Wishlist is Empty"
+            android:textColor="@color/moes_forest_green"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="My Wishlist"
-                android:textColor="@color/moes_gold"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvWishlistCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitle"
-                android:layout_marginTop="2dp"
-                android:text="Saved items"
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="13sp" />
-
-        </RelativeLayout>
-
-        <!-- Main Content area with RecyclerView & Empty state -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvWishlist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="16dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                tools:listitem="@layout/item_customer_product" />
-
-            <!-- Empty Wishlist Layout -->
-            <LinearLayout
-                android:id="@+id/tvEmptyWishlist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="24dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:contentDescription="Empty Wishlist"
-                    android:src="@drawable/ic_heart_outline"
-                    app:tint="@color/dark_text_secondary" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Your Wishlist is Empty"
-                    android:textColor="@color/dark_text_primary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="Tap the heart icon on any product to save it here."
-                    android:textColor="@color/dark_text_secondary"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-        </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Items you save will appear here for easy access."
+            android:textColor="@color/text_dark"
+            android:textSize="14sp"
+            android:gravity="center" />
 
     </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

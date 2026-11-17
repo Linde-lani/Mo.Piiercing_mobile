@@ -126,7 +126,7 @@ class LoginScreen : AppCompatActivity() {
                         "username" to name,
                         "email" to email,
                         "userId" to userId,
-                        "role" to "user",
+                        "role" to "CUSTOMER",
                         "createdAt" to System.currentTimeMillis()
                     )
                     db.collection("users").document(userId).set(userMap)
@@ -151,9 +151,9 @@ class LoginScreen : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 progressBar.visibility = View.GONE
                 if (document != null && document.exists()) {
-                    val role = document.getString("role")?.lowercase() ?: "user"
+                    val rawRole = document.getString("role")?.trim()?.uppercase() ?: "CUSTOMER"
                     
-                    if (role == "admin") {
+                    if (rawRole == "ADMIN") {
                         Toast.makeText(this, "Welcome Admin", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, AdminMain::class.java))
                     } else {

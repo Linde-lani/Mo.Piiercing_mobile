@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
+    app:strokeColor="#2A2A2A"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Product Image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_jewelry_24"
+                app:shapeAppearanceOverlay="@style/RoundedImage" />
+
+            <TextView
+                android:id="@+id/tvLowStockBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_badge_low_stock"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="LOW STOCK"
+                android:textColor="#E53935"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Titanium Septum Ring" />
+
+            <TextView
+                android:id="@+id/tvProductCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#B0B0B0"
+                android:textSize="10sp"
+                tools:text="Jewellery" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#D4AF37"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="R350.00" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

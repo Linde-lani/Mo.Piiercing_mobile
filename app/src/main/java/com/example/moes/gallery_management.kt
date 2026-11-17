@@ -404,10 +404,7 @@ class gallery_management : AppCompatActivity() {
         dialogBinding.dialogTvStock.text = "Available Stock: ${product.stock} items"
         dialogBinding.dialogTvStatus.text = "Featured: ${if (product.featured) "Yes" else "No"} | Active: ${if (product.active) "Yes" else "No"}"
 
-        Glide.with(this)
-            .load(product.imageUrl)
-            .placeholder(R.drawable.sparkle_motion)
-            .into(dialogBinding.dialogIvProduct)
+        bindProductImage(this, product.imageUrl, dialogBinding.dialogIvProduct)
 
         dialogBinding.btnDialogDelete.setOnClickListener {
             deleteProduct(product)

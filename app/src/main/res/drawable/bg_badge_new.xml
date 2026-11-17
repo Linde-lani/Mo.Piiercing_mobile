@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/status_new_bg" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#331E88E5" />
     <corners android:radius="12dp" />
-    <padding
-        android:left="10dp"
-        android:top="4dp"
-        android:right="10dp"
-        android:bottom="4dp" />
+    <stroke android:width="1dp" android:color="#1E88E5" />
 </shape>

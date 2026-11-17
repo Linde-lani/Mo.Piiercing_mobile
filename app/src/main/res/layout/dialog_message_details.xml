@@ -1,176 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/dark_surface"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="8dp"
-    app:strokeColor="@color/moes_gold"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="16dp"
+    app:strokeColor="#D4AF37"
     app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="16dp">
 
-        <!-- Dialog Title / Customer Name & Status -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/dialogCustomerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/dialogCustomerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@id/dialogStatusBadge"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/dark_text_primary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Sarah Connor" />
-
-            <TextView
-                android:id="@+id/dialogStatusBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/bg_badge_new"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:textColor="@color/status_text_color"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="NEW" />
-
-        </RelativeLayout>
-
-        <!-- Message Date -->
         <TextView
             android:id="@+id/dialogMessageDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/dark_text_secondary"
-            android:textSize="13sp"
-            tools:text="Date: Oct 24, 2023 • 10:30 AM" />
+            android:textColor="#B0B0B0"
+            android:textSize="12sp" />
 
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:background="#33FFFFFF" />
-
-        <!-- Email Address -->
         <TextView
             android:id="@+id/dialogEmail"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:textColor="@color/dark_text_primary"
-            android:textSize="14sp"
-            app:drawableStartCompat="@android:drawable/ic_dialog_email"
-            app:drawableTint="@color/moes_gold"
-            tools:text="Email: sarah.c@example.com" />
+            android:textColor="#B0B0B0"
+            android:textSize="12sp" />
 
-        <!-- Phone Number -->
         <TextView
             android:id="@+id/dialogPhone"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:drawablePadding="8dp"
-            android:textColor="@color/dark_text_primary"
-            android:textSize="14sp"
-            app:drawableStartCompat="@android:drawable/ic_menu_call"
-            app:drawableTint="@color/moes_gold"
-            tools:text="Phone: +1 (555) 019-2834" />
+            android:textColor="#B0B0B0"
+            android:textSize="12sp" />
 
-        <!-- Subject -->
         <TextView
             android:id="@+id/dialogSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#D4AF37"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialogFullMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dialogStatusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="@color/moes_gold"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Subject: Septum Piercing Aftercare Question" />
+            android:padding="6dp"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
-        <!-- Full Message Container (Scrollable) -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="16dp"
-            android:maxHeight="250dp">
-
-            <TextView
-                android:id="@+id/dialogFullMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#1F000000"
-                android:lineSpacingExtra="4dp"
-                android:padding="12dp"
-                android:textColor="@color/dark_text_primary"
-                android:textSize="14sp"
-                tools:text="Hi there!\n\nI got my septum pierced at your studio 3 days ago. I was wondering if I should keep cleaning it with saline spray twice a day, or if I should transition to warm water rinses? Also, is slight swelling normal during the first week?\n\nThanks,\nSarah" />
-
-        </ScrollView>
-
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="14dp"
-            android:background="#33FFFFFF" />
-
-        <!-- Bottom Dialog Action Buttons: Mark as Read, Mark as Resolved, Close -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnDialogMarkRead"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:text="Mark Read"
-                android:textColor="@color/status_read_bg"
-                android:textSize="12sp"
-                app:strokeColor="@color/status_read_bg" />
+                android:layout_weight="1"
+                android:text="Mark Read" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnDialogMarkResolved"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:backgroundTint="@color/status_resolved_bg"
-                android:text="Resolve"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:text="Mark Resolved" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btnDialogClose"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Close"
-                android:textColor="@color/dark_text_secondary"
-                android:textSize="12sp" />
-
+                android:layout_weight="1"
+                android:text="Close" />
         </LinearLayout>
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

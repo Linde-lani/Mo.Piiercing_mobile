@@ -1,225 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/dark_surface"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="8dp"
-    app:strokeColor="@color/moes_gold"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="16dp"
+    app:strokeColor="#D4AF37"
     app:strokeWidth="1dp">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Jewellery Item"
+            android:textColor="#D4AF37"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etJewelleryName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Jewellery Name"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/etJewelleryDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/etJewelleryPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price (R)"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/etJewelleryStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stock Quantity"
+            android:inputType="number"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/etJewelleryImageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image URL"
+            android:textColor="#FFFFFF" />
+
+        <AutoCompleteTextView
+            android:id="@+id/actvJewelleryCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Category"
+            android:textColor="#FFFFFF" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchFeaturedJewellery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Featured"
+            android:textColor="#FFFFFF" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchActiveJewellery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Active"
+            android:textColor="#FFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvDialogTitle"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnCancelJewellery"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Add New Jewellery"
-                android:textColor="@color/moes_gold"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:text="Cancel" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
-                android:background="#33FFFFFF" />
-
-            <!-- Product Name Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnSaveJewellery"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Product Name"
-                android:textColorHint="@color/dark_text_secondary"
-                app:boxStrokeColor="@color/moes_gold"
-                app:hintTextColor="@color/moes_gold">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJewelleryName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
-                    android:textColor="@color/dark_text_primary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Description Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Description"
-                android:textColorHint="@color/dark_text_secondary"
-                app:boxStrokeColor="@color/moes_gold"
-                app:hintTextColor="@color/moes_gold">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJewelleryDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:lines="3"
-                    android:textColor="@color/dark_text_primary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Price & Stock Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:hint="Price (ZAR / R)"
-                    android:textColorHint="@color/dark_text_secondary"
-                    app:boxStrokeColor="@color/moes_gold"
-                    app:hintTextColor="@color/moes_gold">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etJewelleryPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/dark_text_primary" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:hint="Stock Quantity"
-                    android:textColorHint="@color/dark_text_secondary"
-                    app:boxStrokeColor="@color/moes_gold"
-                    app:hintTextColor="@color/moes_gold">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etJewelleryStock"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:text="15"
-                        android:textColor="@color/dark_text_primary" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <!-- Image URL Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Image URL"
-                android:textColorHint="@color/dark_text_secondary"
-                app:boxStrokeColor="@color/moes_gold"
-                app:hintTextColor="@color/moes_gold">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJewelleryImageUrl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textUri"
-                    android:textColor="@color/dark_text_primary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Category Selector -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Category"
-                android:textColorHint="@color/dark_text_secondary"
-                app:boxStrokeColor="@color/moes_gold"
-                app:hintTextColor="@color/moes_gold">
-
-                <AutoCompleteTextView
-                    android:id="@+id/actvJewelleryCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:text="Jewellery"
-                    android:textColor="@color/dark_text_primary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Toggles: Featured & Active -->
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switchFeaturedJewellery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:checked="true"
-                android:text="Featured Product"
-                android:textColor="@color/dark_text_primary"
-                app:thumbTint="@color/moes_gold"
-                app:trackTint="#33C69C35" />
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/switchActiveJewellery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:checked="true"
-                android:text="Active (Visible in Gallery)"
-                android:textColor="@color/dark_text_primary"
-                app:thumbTint="@color/moes_forest_green"
-                app:trackTint="#331B5E20" />
-
-            <!-- Buttons: Save & Cancel -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="end"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancelJewellery"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:textColor="@color/dark_text_secondary" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSaveJewellery"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:backgroundTint="@color/moes_forest_green"
-                    android:text="Save Product"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
+                android:layout_weight="1"
+                android:text="Save" />
         </LinearLayout>
-
-    </ScrollView>
-
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

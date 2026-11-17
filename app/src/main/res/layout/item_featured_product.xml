@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="310dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:strokeColor="#33D4AF37"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Image with Badge Overlay -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Product Image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_jewelry_24" />
+
+            <TextView
+                android:id="@+id/tvBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                android:background="#D4AF37"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:textColor="#121212"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="FEATURED" />
+
+            <TextView
+                android:id="@+id/tvCategoryBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="#33000000"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:textColor="#D4AF37"
+                android:textSize="9sp"
+                tools:text="Tattoo" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Dragon Sleeve Tattoo" />
+
+            <TextView
+                android:id="@+id/tvProductDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#B0B0B0"
+                android:textSize="11sp"
+                tools:text="Detailed Japanese style dragon forearm piece with shading." />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="#D4AF37"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="R 1,200.00" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBookProduct"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:text="Book"
+                    android:textColor="#D4AF37"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    app:strokeColor="#D4AF37" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddToCart"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#1B5E20"
+                    android:padding="0dp"
+                    android:text="Cart"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

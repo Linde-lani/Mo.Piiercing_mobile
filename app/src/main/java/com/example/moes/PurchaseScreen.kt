@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
-
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -41,7 +41,6 @@ open class PurchaseScreen : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // UI Initialization - Ensure these IDs exist in activity_purchase_screen.xml
         cartItemsContainer = findViewById(R.id.cartItemsList)
         tvSubtotal = findViewById(R.id.tvSubtotal)
         tvTotal = findViewById(R.id.tvTotal)
@@ -56,7 +55,7 @@ open class PurchaseScreen : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnContinue).setOnClickListener {
-            finish() // Returns to the previous screen (Gallery)
+            finish()
         }
     }
 
@@ -86,11 +85,8 @@ open class PurchaseScreen : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     private fun addCartItemToView(item: CartItem) {
         val inflater = LayoutInflater.from(this)
-
-        // FIX: Change R.layout.activity_purchase_screen to R.layout.item_cart_card
         val itemView = inflater.inflate(R.layout.activity_item_cart_card, cartItemsContainer, false)
 
-        // Bind Views
         val tvName = itemView.findViewById<TextView>(R.id.tvItemName)
         val tvPriceEach = itemView.findViewById<TextView>(R.id.tvPriceEach)
         val tvLinePrice = itemView.findViewById<TextView>(R.id.tvLinePrice)
@@ -100,13 +96,13 @@ open class PurchaseScreen : AppCompatActivity() {
         val btnMinus = itemView.findViewById<ImageView>(R.id.ivMinus)
         val ivItem = itemView.findViewById<ImageView>(R.id.itemImage)
 
-        // Populate Data
         tvName.text = item.name
         tvPriceEach.text = "R ${item.price.toInt()} each"
         tvLinePrice.text = "R ${(item.price * item.quantity).toInt()}"
         tvQty.text = item.quantity.toString()
 
-        // Button Logic
+        bindProductImage(this, item.imageUrl, ivItem)
+
         btnRemove.setOnClickListener { removeItem(item.id) }
 
         btnAdd.setOnClickListener {
@@ -121,7 +117,6 @@ open class PurchaseScreen : AppCompatActivity() {
             }
         }
 
-        // Add the dynamic row to the container
         cartItemsContainer.addView(itemView)
     }
 

@@ -34,7 +34,6 @@ class BookingScreen : AppCompatActivity() {
     private lateinit var cbAgree: CheckBox
     private lateinit var btnConfirm: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,22 +72,21 @@ class BookingScreen : AppCompatActivity() {
         chipGroupTime = findViewById(R.id.chipGroupTime)
         cbAgree = findViewById(R.id.cbAgree)
         btnConfirm = findViewById(R.id.btnConfirmBooking)
-
     }
 
-    /**
-     * Corresponds to DOMContentLoaded: populate saved user data
-     */
     private fun populateUserData() {
         val user = auth.currentUser
-        etName.setText(user?.displayName)
+        val displayName = user?.displayName ?: user?.email?.substringBefore("@") ?: "Customer"
+        etName.setText(displayName)
         etEmail.setText(user?.email)
 
-        // Fetch phone from Firestore if it's not in Auth
         user?.uid?.let { uid ->
             db.collection("users").document(uid).get().addOnSuccessListener { doc ->
                 if (doc.exists()) {
-                    etPhone.setText(doc.getString("phone"))
+                    val phone = doc.getString("phone")
+                    if (!phone.isNullOrEmpty()) {
+                        etPhone.setText(phone)
+                    }
                 }
             }
         }
@@ -96,12 +94,24 @@ class BookingScreen : AppCompatActivity() {
 
     private fun setupServiceDropdown() {
         val services = arrayOf(
-            "Ear Piercing - R300", "Nose Piercing - R450",
-            "Small Tattoo - R800", "Medium Tattoo - R1500",
-            "Single Tooth Gem - R250"
+            "Ear Piercings - R250",
+            "Nose Piercings - R300",
+            "Septum Piercing - R350",
+            "Industrial Piercings - R350",
+            "Belly Piercings - R350",
+            "Single Tooth Gem - R250",
+            "Small Custom Tattoo - R450",
+            "Large Custom Tattoo - R1,200",
+            "Flash Art Tattoo - R850"
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, services)
         spinnerService.setAdapter(adapter)
+
+        val passedService = intent.getStringExtra("SERVICE_NAME") ?: intent.getStringExtra("SELECTED_SERVICE")
+        if (!passedService.isNullOrEmpty()) {
+            val matchingOption = services.firstOrNull { it.contains(passedService, ignoreCase = true) } ?: passedService
+            spinnerService.setText(matchingOption, false)
+        }
     }
 
     private fun setupDatePicker() {
@@ -121,14 +131,12 @@ class BookingScreen : AppCompatActivity() {
     }
 
     private fun checkBookedSlots(date: String) {
-        // Reset all chips to enabled and full opacity
         for (i in 0 until chipGroupTime.childCount) {
             val chip = chipGroupTime.getChildAt(i) as? Chip
             chip?.isEnabled = true
             chip?.alpha = 1.0f
         }
 
-        // Query Firestore for bookings on this date
         db.collection("bookingSlots")
             .whereEqualTo("date", date)
             .get()
@@ -141,7 +149,6 @@ class BookingScreen : AppCompatActivity() {
                     }
                 }
 
-                // Disable chips that match booked times
                 for (i in 0 until chipGroupTime.childCount) {
                     val chip = chipGroupTime.getChildAt(i) as? Chip
                     if (chip != null && bookedTimes.contains(chip.text.toString())) {
@@ -158,9 +165,6 @@ class BookingScreen : AppCompatActivity() {
             }
     }
 
-    /**
-     * Replaces JS handleBooking(event)
-     */
     private fun handleBooking() {
         val selectedChipId = chipGroupTime.checkedChipId
 
@@ -168,7 +172,6 @@ class BookingScreen : AppCompatActivity() {
             Toast.makeText(this, "Please select a preferred date first", Toast.LENGTH_SHORT).show()
             return
         }
-        // Validation logic
         if (etPhone.text.isNullOrBlank()) {
             etPhone.error = "Phone number required"
             return
@@ -178,7 +181,7 @@ class BookingScreen : AppCompatActivity() {
             return
         }
         if (!cbAgree.isChecked) {
-            Toast.makeText(this, "Please agree to aftercare instructions", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please agree to aftercare guidelines", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -189,31 +192,32 @@ class BookingScreen : AppCompatActivity() {
     private fun saveBookingToFirestore(time: String) {
         val userId = auth.currentUser?.uid ?: return
         val userName = etName.text.toString()
+        val userEmail = etEmail.text.toString()
         val date = etDate.text.toString()
+        val selectedService = spinnerService.text.toString().ifEmpty { "Studio Piercing / Tattoo Session" }
 
-        // Double check availability before saving to prevent race conditions
         db.collection("bookingSlots")
             .whereEqualTo("date", date)
             .whereEqualTo("time", time)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
-                    Toast.makeText(this, "Sorry, this time slot was just booked by someone else. Please choose another.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Sorry, this time slot was just booked by someone else.", Toast.LENGTH_LONG).show()
                     checkBookedSlots(date)
                     return@addOnSuccessListener
                 }
 
                 val booking = hashMapOf(
                     "userId" to userId,
-                    "name" to userName,
-                    "email" to etEmail.text.toString(),
-                    "phone" to etPhone.text.toString(),
-                    "service" to spinnerService.text.toString(),
-                    "date" to date,
-                    "time" to time,
-                    "notes" to etNotes.text.toString(),
+                    "customerName" to userName.ifEmpty { userEmail.substringBefore("@") },
+                    "customerEmail" to userEmail,
+                    "customerPhone" to etPhone.text.toString(),
+                    "serviceName" to selectedService,
+                    "bookingDate" to date,
+                    "bookingTime" to time,
+                    "bookingNotes" to etNotes.text.toString(),
                     "status" to "Pending",
-                    "timestamp" to com.google.firebase.Timestamp.now()
+                    "timestamp" to System.currentTimeMillis()
                 )
 
                 db.collection("bookings").add(booking)

@@ -257,7 +257,7 @@
                             android:checked="true"
                             android:text="All"
                             android:textColor="@color/white"
-                            app:chipBackgroundColor="#33C69C35" />
+                            app:chipBackgroundColor="#262624" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipTattoos"
@@ -265,7 +265,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tattoos"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipJewellery"
@@ -273,7 +274,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Jewellery"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipEar"
@@ -281,7 +283,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ear Piercing"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipNose"
@@ -289,7 +292,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nose Piercing"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipBelly"
@@ -297,7 +301,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Belly Piercing"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipIndustrial"
@@ -305,7 +310,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Industrial Piercing"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipFeatured"
@@ -313,7 +319,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Featured"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            app:chipBackgroundColor="#262624"/>
 
                     </com.google.android.material.chip.ChipGroup>
 
@@ -339,7 +346,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_customer_product" />
+                    tools:listitem="@layout/product_preview_item" />
 
                 <!-- Section 2: Featured Jewellery -->
                 <TextView
@@ -361,7 +368,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_customer_product" />
+                    tools:listitem="@layout/product_preview_item" />
 
                 <!-- Section 3: New Arrivals -->
                 <TextView
@@ -383,7 +390,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_customer_product" />
+                    tools:listitem="@layout/product_preview_item" />
 
                 <!-- Section 4: Best Sellers -->
                 <TextView
@@ -405,7 +412,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_customer_product" />
+                    tools:listitem="@layout/product_preview_item" />
 
                 <!-- Section 5: Recommended For You -->
                 <TextView
@@ -427,7 +434,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_customer_product" />
+                    tools:listitem="@layout/product_preview_item" />
 
             </LinearLayout>
 

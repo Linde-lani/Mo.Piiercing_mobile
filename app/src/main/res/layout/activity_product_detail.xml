@@ -1,290 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_bg"
+    android:background="@color/white"
     tools:context=".ProductDetailActivity">
 
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/moes_forest_green">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Product Details"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnWishlistToggle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_heart_outline"
+            android:contentDescription="Wishlist" />
+    </RelativeLayout>
+
+    <!-- Bottom Action Bar -->
+    <LinearLayout
+        android:id="@+id/bottomActionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:elevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBookAppointment"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Book Appointment"
+            android:textColor="@color/moes_forest_green"
+            app:strokeColor="@color/moes_forest_green"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddToCart"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Add to Cart"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/moes_forest_green"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/navBar"
+        android:layout_above="@id/bottomActionLayout"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="80dp">
+            android:padding="16dp">
 
-            <!-- Product Image Header -->
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/ivDetailProductImage"
                 android:layout_width="match_parent"
-                android:layout_height="280dp">
+                android:layout_height="280dp"
+                android:scaleType="centerCrop"
+                android:background="@color/gray_light"
+                android:contentDescription="Product Image" />
 
-                <ImageView
-                    android:id="@+id/ivDetailProductImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="Product Image"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/septum" />
+            <TextView
+                android:id="@+id/tvDetailCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Category"
+                android:textColor="@color/moes_gold"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="true" />
 
-                <!-- Back Button -->
-                <ImageButton
-                    android:id="@+id/btnBack"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="16dp"
-                    android:background="#A6000000"
-                    android:contentDescription="Back"
-                    android:src="@android:drawable/ic_menu_revert"
-                    app:tint="@color/white" />
-
-                <!-- Wishlist Toggle Icon -->
-                <ImageButton
-                    android:id="@+id/btnWishlistToggle"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="16dp"
-                    android:background="#A6000000"
-                    android:contentDescription="Wishlist"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_heart_outline"
-                    app:tint="@color/white" />
-
-            </RelativeLayout>
-
-            <!-- Product Information -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvDetailProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_marginTop="8dp"
+                android:text="Product Name"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvDetailCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/moes_gold"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="JEWELLERY" />
+            <TextView
+                android:id="@+id/tvDetailProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="R 0.00"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvDetailName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/dark_text_primary"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    tools:text="Implant-Grade Titanium Septum Ring" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/gray_light" />
 
-                <TextView
-                    android:id="@+id/tvDetailPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:textColor="@color/moes_gold"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="R450.00" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/moes_forest_green"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvDetailStock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/status_resolved_bg"
-                    android:textSize="13sp"
-                    tools:text="In Stock (15 items available)" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#33FFFFFF" />
-
-                <!-- Description -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description:"
-                    android:textColor="@color/moes_gold"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvDetailDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:lineSpacingExtra="3dp"
-                    android:textColor="@color/dark_text_primary"
-                    android:textSize="14sp"
-                    tools:text="Premium hypoallergenic ASTM F-136 implant-grade titanium body jewelry designed for comfortable long-term wear." />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#33FFFFFF" />
-
-                <!-- Ratings & Reviews Section -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Customer Ratings &amp; Reviews"
-                    android:textColor="@color/moes_gold"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <!-- Average Rating summary -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvAvgRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4.9 ★★★★★"
-                        android:textColor="@color/moes_gold"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvReviewCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="(12 reviews)"
-                        android:textColor="@color/dark_text_secondary"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <!-- Add Review Box -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="@color/dark_surface"
-                    app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/dark_card_stroke"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Leave a Review:"
-                            android:textColor="@color/dark_text_primary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:hint="Write your review..."
-                            android:textColorHint="@color/dark_text_secondary"
-                            app:boxStrokeColor="@color/moes_gold">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etReviewComment"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textMultiLine"
-                                android:lines="2"
-                                android:textColor="@color/dark_text_primary" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnSubmitReview"
-                            style="@style/Widget.Material3.Button.TonalButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="8dp"
-                            android:backgroundTint="@color/moes_forest_green"
-                            android:text="Submit Review"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Reviews RecyclerView -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvReviews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:nestedScrollingEnabled="false"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tvDetailProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Product description goes here..."
+                android:textColor="@color/text_dark"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp" />
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Action Bar: Book Appointment & Add to Cart -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="bottom"
-        android:background="@color/dark_surface"
-        android:elevation="12dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBookAppointment"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/moes_forest_green"
-            android:text="Book Appointment"
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddToCart"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="6dp"
-            android:layout_weight="1"
-            android:text="Add To Cart"
-            android:textColor="@color/moes_gold"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:strokeColor="@color/moes_gold" />
-
-    </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
