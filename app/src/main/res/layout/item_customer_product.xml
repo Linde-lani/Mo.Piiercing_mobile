@@ -19,14 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Product Image -->
         <ImageView
             android:id="@+id/ivProductImage"
             android:layout_width="match_parent"
             android:layout_height="115dp"
             android:contentDescription="Product Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/septum" />
+            android:src="@drawable/jewelry_1" />
 
         <!-- Wishlist Heart Icon -->
         <ImageButton

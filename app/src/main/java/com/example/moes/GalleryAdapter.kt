@@ -56,8 +56,8 @@ class GalleryAdapter(
 
             Glide.with(binding.root.context)
                 .load(product.imageUrl)
-                .placeholder(R.drawable.septum)
-                .error(R.drawable.septum)
+                .placeholder(R.drawable.jewelry_1)
+                .error(R.drawable.jewelry_1)
                 .into(binding.ivProductImage)
 
             binding.root.setOnClickListener { onProductClick(product) }
@@ -77,8 +77,8 @@ class GalleryAdapter(
 
             Glide.with(binding.root.context)
                 .load(product.imageUrl)
-                .placeholder(R.drawable.septum)
-                .error(R.drawable.septum)
+                .placeholder(R.drawable.jewelry_1)
+                .error(R.drawable.jewelry_1)
                 .into(binding.ivProductImage)
 
             binding.root.setOnClickListener { onProductClick(product) }

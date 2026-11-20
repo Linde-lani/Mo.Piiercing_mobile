@@ -23,8 +23,9 @@
             android:id="@+id/ivProductImage"
             android:layout_width="match_parent"
             android:layout_height="110dp"
+            android:contentDescription="Product Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/sparkle_motion" />
+            android:src="@drawable/luxury_studio_bg" />
 
         <!-- Overflow Menu Button (Three Dots) -->
         <ImageButton

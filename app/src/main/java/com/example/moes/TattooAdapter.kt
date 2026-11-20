@@ -89,7 +89,7 @@ class TattooAdapter(
 
             Glide.with(binding.root.context)
                 .load(product.imageUrl)
-                .placeholder(R.drawable.sparkle_motion)
+                .placeholder(R.drawable.tatto_1)
                 .error(R.drawable.tatto_1)
                 .into(binding.ivProductImage)
 

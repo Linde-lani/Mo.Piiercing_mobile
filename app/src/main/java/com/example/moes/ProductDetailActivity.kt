@@ -2,140 +2,140 @@ package com.example.moes
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.button.MaterialButton
+import com.bumptech.glide.Glide
+import com.example.moes.databinding.ActivityProductDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
- * ProductDetailActivity displays detailed item information, specifications,
- * studio guarantees, and options to Add to Cart, Book Appointment, or Wishlist.
+ * Activity displaying detailed product information, booking & cart integration.
  */
 class ProductDetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityProductDetailBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
-    private var currentProduct: Product? = null
-    private var isWishlisted = false
+    private var product: Product? = null
+    private var isWishlisted: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_product_detail)
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
+        binding = ActivityProductDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        @Suppress("DEPRECATION")
-        currentProduct = intent.getSerializableExtra("EXTRA_PRODUCT") as? Product
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-        val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        val btnWishlist = findViewById<ImageButton>(R.id.btnWishlistToggle)
-        val ivImage = findViewById<ImageView>(R.id.ivDetailProductImage)
-        val tvCategory = findViewById<TextView>(R.id.tvDetailCategory)
-        val tvName = findViewById<TextView>(R.id.tvDetailProductName)
-        val tvPrice = findViewById<TextView>(R.id.tvDetailProductPrice)
-        val tvDesc = findViewById<TextView>(R.id.tvDetailProductDescription)
-        val btnBook = findViewById<MaterialButton>(R.id.btnBookAppointment)
-        val btnAddToCart = findViewById<MaterialButton>(R.id.btnAddToCart)
+        product = intent.getSerializableExtra("EXTRA_PRODUCT") as? Product
 
-        btnBack.setOnClickListener { finish() }
-
-        currentProduct?.let { prod ->
-            tvName.text = prod.name
-            tvCategory.text = prod.category.ifEmpty { "Studio Item" }
-            tvPrice.text = "R ${"%.2f".format(prod.price)}"
-            tvDesc.text = prod.description.ifEmpty { "High quality studio piece designed by Mo Piercings & Co." }
-
-            bindProductImage(this, prod.imageUrl, ivImage)
-
-            checkWishlistState(prod)
-
-            btnWishlist.setOnClickListener {
-                toggleWishlist(prod, btnWishlist)
-            }
-
-            btnBook.setOnClickListener {
-                val intent = Intent(this, BookingScreen::class.java)
-                intent.putExtra("SERVICE_NAME", prod.name)
-                startActivity(intent)
-            }
-
-            btnAddToCart.setOnClickListener {
-                addProductToCart(prod)
-            }
-        } ?: run {
-            Toast.makeText(this, "Product details unavailable", Toast.LENGTH_SHORT).show()
+        if (product == null) {
+            Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show()
             finish()
+            return
         }
+
+        bindProductData()
+        checkWishlistStatus()
+
+        binding.btnBack.setOnClickListener { finish() }
+        binding.btnWishlistToggle.setOnClickListener { toggleWishlist() }
+        binding.btnBookAppointment.setOnClickListener { bookAppointment() }
+        binding.btnAddToCart.setOnClickListener { addToCart() }
     }
 
-    private fun checkWishlistState(product: Product) {
-        val userId = auth.currentUser?.uid ?: return
-        if (product.productId.isEmpty()) return
+    private fun bindProductData() {
+        val prod = product ?: return
 
-        db.collection("users").document(userId).collection("wishlist").document(product.productId)
+        binding.tvDetailProductName.text = prod.name
+        binding.tvDetailCategory.text = prod.category.uppercase()
+        binding.tvDetailProductPrice.text = "R${String.format("%.2f", prod.price)}"
+        binding.tvDetailProductDescription.text = prod.description.ifEmpty { "No description available." }
+
+        Glide.with(this)
+            .load(prod.imageUrl)
+            .placeholder(R.drawable.jewelry_1)
+            .error(R.drawable.jewelry_1)
+            .into(binding.ivDetailProductImage)
+    }
+
+    private fun checkWishlistStatus() {
+        val userId = auth.currentUser?.uid ?: return
+        val prodId = product?.productId ?: return
+
+        db.collection("users").document(userId).collection("wishlist")
+            .document(prodId)
             .get()
             .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    isWishlisted = true
-                    findViewById<ImageButton>(R.id.btnWishlistToggle).setImageResource(R.drawable.ic_heart_filled)
-                }
+                isWishlisted = doc.exists()
+                updateWishlistIcon()
             }
     }
 
-    private fun toggleWishlist(product: Product, btn: ImageButton) {
+    private fun toggleWishlist() {
         val userId = auth.currentUser?.uid ?: return
-        val docId = if (product.productId.isNotEmpty()) product.productId else product.name.replace(" ", "_")
-        val ref = db.collection("users").document(userId).collection("wishlist").document(docId)
+        val prod = product ?: return
+
+        val ref = db.collection("users").document(userId).collection("wishlist").document(prod.productId)
 
         if (isWishlisted) {
             ref.delete().addOnSuccessListener {
                 isWishlisted = false
-                btn.setImageResource(R.drawable.ic_heart_outline)
+                updateWishlistIcon()
                 Toast.makeText(this, "Removed from Wishlist", Toast.LENGTH_SHORT).show()
             }
         } else {
-            ref.set(product).addOnSuccessListener {
+            ref.set(prod).addOnSuccessListener {
                 isWishlisted = true
-                btn.setImageResource(R.drawable.ic_heart_filled)
+                updateWishlistIcon()
                 Toast.makeText(this, "Added to Wishlist!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun addProductToCart(product: Product) {
+    private fun updateWishlistIcon() {
+        if (isWishlisted) {
+            binding.btnWishlistToggle.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            binding.btnWishlistToggle.setImageResource(R.drawable.ic_heart_outline)
+        }
+    }
+
+    private fun bookAppointment() {
+        val prod = product ?: return
+        val intent = Intent(this, BookingScreen::class.java)
+        intent.putExtra("SELECTED_SERVICE", prod.name)
+        startActivity(intent)
+    }
+
+    private fun addToCart() {
         val userId = auth.currentUser?.uid ?: return
+        val prod = product ?: return
+
         val cartItem = hashMapOf(
-            "productId" to product.productId,
-            "name" to product.name,
-            "price" to product.price,
-            "imageUrl" to product.imageUrl,
-            "quantity" to 1,
-            "timestamp" to System.currentTimeMillis()
+            "name" to prod.name,
+            "price" to prod.price,
+            "imageUrl" to prod.imageUrl,
+            "timestamp" to com.google.firebase.Timestamp.now()
         )
 
         db.collection("users").document(userId).collection("cart")
             .add(cartItem)
             .addOnSuccessListener {
-                Toast.makeText(this, "${product.name} added to Cart!", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to add to cart: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "${prod.name} added to Cart!", Toast.LENGTH_SHORT).show()
             }
     }
 }
